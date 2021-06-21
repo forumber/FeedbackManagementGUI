@@ -11,17 +11,17 @@ import FeedbackManagementGUI.GUI.MainFrame;
  *
  * @author Berkay
  */
-public class Application {
+public class MainApplication {
     
     public MainFrame mainFrame;
     
-    public Application()
+    public MainApplication()
     {
-        mainFrame = new MainFrame();
+        mainFrame = new MainFrame(this);
     }
 
     public static void main(String[] args) {
-        new Application();
+        new MainApplication().mainFrame.start();
     }
     
 }

@@ -5,17 +5,26 @@
  */
 package FeedbackManagementGUI.GUI;
 
+import FeedbackManagementGUI.MainApplication;
+
 /**
  *
  * @author Berkay
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    public MainApplication application;
 
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
-        initComponents();
+    public MainFrame(MainApplication application) {
+        this.application = application;
+        initComponents();        
+    }
+    
+    public void start()
+    {
         changePanel("LoginRegisterSelection");
     }
 
