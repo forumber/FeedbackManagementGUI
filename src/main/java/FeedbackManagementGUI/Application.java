@@ -5,17 +5,23 @@
  */
 package FeedbackManagementGUI;
 
+import FeedbackManagementGUI.GUI.MainFrame;
+
 /**
  *
  * @author Berkay
  */
-public class Main {
+public class Application {
+    
+    public MainFrame mainFrame;
+    
+    public Application()
+    {
+        mainFrame = new MainFrame();
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new Application();
     }
     
 }
