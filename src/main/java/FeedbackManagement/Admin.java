@@ -6,24 +6,19 @@
 package FeedbackManagement;
 
 import java.sql.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Serhat Korkmaz
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Admin extends User{
     private int clearanceLevel;
-
-    public int getClearanceLevel() {
-        return clearanceLevel;
-    }
-
-    public void setClearanceLevel(int clearanceLevel) {
-        this.clearanceLevel = clearanceLevel;
-    }
-
-    public Admin(int clearanceLevel, int userID, String email, int userType, String userName, Date dateOfBirth, String password) {
-        super(userID, email, userType, userName, dateOfBirth, password);
-        this.clearanceLevel = clearanceLevel;
-    }
 }

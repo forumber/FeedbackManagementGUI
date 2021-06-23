@@ -6,35 +6,20 @@
 package FeedbackManagement;
 
 import java.sql.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Serhat Korkmaz
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Employee extends User{
-
     private Date startDate;
     private int depCode;
-    
-    public Employee(Date startDate, int depCode, int userID, String email, int userType, String userName, Date dateOfBirth, String password) {
-        super(userID, email, userType, userName, dateOfBirth, password);
-        this.startDate = startDate;
-        this.depCode = depCode;
-    }
-    
-      public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public int getDepCode() {
-        return depCode;
-    }
-
-    public void setDepCode(int depCode) {
-        this.depCode = depCode;
-    }
 }
