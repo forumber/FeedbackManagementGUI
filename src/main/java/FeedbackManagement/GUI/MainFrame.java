@@ -42,6 +42,24 @@ public class MainFrame extends javax.swing.JFrame {
             repaint();
             setSize(300, 300);
         } 
+        
+        else if (panelName.equalsIgnoreCase("Register"))
+        {
+            getContentPane().removeAll();
+            getContentPane().add(new RegisterPanel(this));
+            pack();
+            repaint();
+            setSize(270, 400);
+        } 
+        
+        else if (panelName.equalsIgnoreCase("Login"))
+        {
+            getContentPane().removeAll();
+            getContentPane().add(new LoginPanel(this));
+            pack();
+            repaint();
+            setSize(300, 150);
+        } 
         setLocationRelativeTo(null);
         setVisible(true);
     }

@@ -5,6 +5,8 @@
  */
 package FeedbackManagement.GUI;
 
+import static java.lang.System.exit;
+
 /**
  *
  * @author Berkay
@@ -20,6 +22,9 @@ public class LoginRegisterSelectionPanel extends javax.swing.JPanel {
         this.mainFrame = mainFrame;
         initComponents();
     }
+
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,14 +47,41 @@ public class LoginRegisterSelectionPanel extends javax.swing.JPanel {
         add(WelcomeLabel);
 
         LoginButton.setText("Login");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
         add(LoginButton);
 
         RegisterButton.setText("Register");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
         add(RegisterButton);
 
         ExitButton.setText("Exit");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButtonActionPerformed(evt);
+            }
+        });
         add(ExitButton);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        mainFrame.changePanel("Login");
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        mainFrame.changePanel("Register");
+    }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        exit(0);
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
