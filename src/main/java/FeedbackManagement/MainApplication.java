@@ -1,9 +1,6 @@
 package FeedbackManagement;
 
 import FeedbackManagement.GUI.MainFrame;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class MainApplication {
     

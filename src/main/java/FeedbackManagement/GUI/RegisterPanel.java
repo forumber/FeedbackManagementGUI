@@ -5,8 +5,6 @@
  */
 package FeedbackManagement.GUI;
 
-import javax.swing.JComboBox;
-
 /**
  *
  * @author Serhat Korkmaz
