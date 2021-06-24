@@ -56,9 +56,9 @@ public class EmployeeRegisterPanel extends javax.swing.JPanel implements java.be
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(45, 45, 45)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(EmpStartDateTF)
-                    .addComponent(EmpDepCodeTF, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(EmpDepCodeTF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(EmpStartDateTF))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -82,8 +82,8 @@ public class EmployeeRegisterPanel extends javax.swing.JPanel implements java.be
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EmpDepCodeTF;
-    private javax.swing.JTextField EmpStartDateTF;
+    public javax.swing.JTextField EmpDepCodeTF;
+    public javax.swing.JTextField EmpStartDateTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

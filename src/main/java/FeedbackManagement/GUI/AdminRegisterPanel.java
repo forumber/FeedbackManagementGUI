@@ -23,6 +23,10 @@ public class AdminRegisterPanel extends javax.swing.JPanel implements java.beans
     public void setObject(Object bean) {
         this.bean = bean;
     }
+    
+    public String getClearance(){
+        return AdminClearanceTF.getText().toString();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,8 +49,8 @@ public class AdminRegisterPanel extends javax.swing.JPanel implements java.beans
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(AdminClearanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(AdminClearanceTF, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
