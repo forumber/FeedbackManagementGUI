@@ -9,19 +9,13 @@ package FeedbackManagement.GUI;
  *
  * @author Serhat Korkmaz
  */
-public class AdminRegisterPanel extends javax.swing.JPanel implements java.beans.Customizer {
-    
-    private Object bean;
+public class AdminRegisterPanel extends javax.swing.JPanel {
 
     /**
      * Creates new customizer AdminRegisterPanel
      */
     public AdminRegisterPanel() {
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
     
     public String getClearance(){

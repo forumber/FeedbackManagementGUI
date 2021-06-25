@@ -9,9 +9,8 @@ package FeedbackManagement.GUI;
  *
  * @author Serhat Korkmaz
  */
-public class LoginPanel extends javax.swing.JPanel implements java.beans.Customizer {
+public class LoginPanel extends javax.swing.JPanel{
     
-    private Object bean;
     private final MainFrame mainFrame;
     /**
      * Creates new customizer LoginPanel
@@ -20,10 +19,6 @@ public class LoginPanel extends javax.swing.JPanel implements java.beans.Customi
      public LoginPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
 
     /**

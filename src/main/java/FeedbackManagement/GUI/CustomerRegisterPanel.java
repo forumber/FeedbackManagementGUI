@@ -9,9 +9,7 @@ package FeedbackManagement.GUI;
  *
  * @author Serhat Korkmaz
  */
-public class CustomerRegisterPanel extends javax.swing.JPanel implements java.beans.Customizer {
-    
-    private Object bean;
+public class CustomerRegisterPanel extends javax.swing.JPanel {
 
     /**
      * Creates new customizer CustomerRegisterPanel
@@ -20,10 +18,6 @@ public class CustomerRegisterPanel extends javax.swing.JPanel implements java.be
         initComponents();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

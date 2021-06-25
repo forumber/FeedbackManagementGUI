@@ -9,19 +9,12 @@ package FeedbackManagement.GUI;
  *
  * @author Serhat Korkmaz
  */
-public class EmployeeRegisterPanel extends javax.swing.JPanel implements java.beans.Customizer {
-    
-    private Object bean;
-
+public class EmployeeRegisterPanel extends javax.swing.JPanel {
     /**
      * Creates new customizer EmployeeRegisterPanel
      */
     public EmployeeRegisterPanel() {
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
 
     /**
