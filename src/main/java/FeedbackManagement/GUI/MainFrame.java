@@ -49,7 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
             getContentPane().add(new RegisterPanel(this));
             pack();
             repaint();
-            setSize(270, 400);
+            setSize(270, 330);
         } 
         
         else if (panelName.equalsIgnoreCase("Login"))

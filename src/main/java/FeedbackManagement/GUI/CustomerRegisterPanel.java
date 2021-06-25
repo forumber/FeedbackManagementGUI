@@ -52,7 +52,7 @@ public class CustomerRegisterPanel extends javax.swing.JPanel implements java.be
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CustPhoneTF, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,7 +73,7 @@ public class CustomerRegisterPanel extends javax.swing.JPanel implements java.be
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CustPhoneTF;
+    public javax.swing.JTextField CustPhoneTF;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,8 +5,12 @@
  */
 package FeedbackManagement.GUI;
 
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
 /**
- *
+ 
  * @author Serhat Korkmaz
  */
 public class RegisterPanel extends javax.swing.JPanel implements java.beans.Customizer {
@@ -43,7 +47,6 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
         PasswordTF = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         RegisterButton = new javax.swing.JButton();
         ExtraPanel = new javax.swing.JPanel();
         TypeCB = new javax.swing.JComboBox();
@@ -52,27 +55,14 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
 
         jLabel2.setText("Email Address:");
 
-        EmailTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailTFActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Date of Birth:");
 
+        DateofBirthTF.setText("DD.MM.YYYY");
         DateofBirthTF.setToolTipText("DD.MM.YYYY");
-
-        PasswordTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordTFActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Password:");
 
         jLabel5.setText("UserType:");
-
-        jLabel6.setText("UserType Information:");
 
         RegisterButton.setText("Register");
         RegisterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +72,11 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
         });
 
         TypeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admin", "Employee", "Customer" }));
+        TypeCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TypeCBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,8 +102,7 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
                             .addComponent(EmailTF)
                             .addComponent(DateofBirthTF)
                             .addComponent(PasswordTF)
-                            .addComponent(TypeCB, 0, 119, Short.MAX_VALUE)))
-                    .addComponent(jLabel6))
+                            .addComponent(TypeCB, 0, 119, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -135,10 +129,8 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
                     .addComponent(jLabel5)
                     .addComponent(TypeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ExtraPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(ExtraPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(RegisterButton)
                 .addContainerGap())
         );
@@ -151,17 +143,34 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
         ExtraPanel.getAccessibleContext().setAccessibleName("ExtraPanel");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PasswordTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordTFActionPerformed
-
-    private void EmailTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailTFActionPerformed
-
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        // TODO add your handling code here:
+        boolean emptyField = false;
+        Component frame = null;
+        if(DateofBirthTF.getText().length() == 0 || EmailTF.getText().length() == 0 || PasswordTF.getText().length() == 0 || UserNameTF.getText().length() == 0) emptyField = true;
+        if(emptyField == true) JOptionPane.showMessageDialog(frame, "You need to fill all the fields to register!!");
+        else{
+            if(TypeCB.getSelectedItem().toString() == "Admin"){
+                
+            }
+            else if(TypeCB.getSelectedItem().toString() == "Employee"){
+                
+            }
+            else if(TypeCB.getSelectedItem().toString() == "Customer"){
+                
+            }
+        }
+            
+        
     }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void TypeCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeCBActionPerformed
+        ExtraPanel.removeAll();
+        if(TypeCB.getSelectedItem().toString() == "Admin") ExtraPanel.add( new AdminRegisterPanel());
+        else if(TypeCB.getSelectedItem().toString() == "Employee") ExtraPanel.add( new EmployeeRegisterPanel());
+        else if(TypeCB.getSelectedItem().toString() == "Customer") ExtraPanel.add( new CustomerRegisterPanel());
+        ExtraPanel.validate();
+        ExtraPanel.repaint();
+    }//GEN-LAST:event_TypeCBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -177,6 +186,5 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }
