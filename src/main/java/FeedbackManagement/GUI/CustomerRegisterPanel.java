@@ -73,7 +73,7 @@ public class CustomerRegisterPanel extends javax.swing.JPanel implements java.be
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextField CustPhoneTF;
+    public static javax.swing.JTextField CustPhoneTF;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

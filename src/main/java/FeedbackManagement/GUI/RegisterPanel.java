@@ -5,8 +5,21 @@
  */
 package FeedbackManagement.GUI;
 
+import FeedbackManagement.Admin;
+import FeedbackManagement.Customer;
+import FeedbackManagement.Employee;
+import static FeedbackManagement.GUI.EmployeeRegisterPanel.EmpStartDateTF;
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +41,23 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
     
     public void setObject(Object bean) {
         this.bean = bean;
+    }
+    
+    public int generatedID(){
+        return ThreadLocalRandom.current().nextInt(100000, 999999);
+    }
+    
+    /**
+     *
+     * @param s
+     * @return
+     * @throws ParseException
+     */
+    public Date ConverttoDate(String s) throws ParseException{
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = (Date) format.parse(s);
+        System.out.println(date);
+        return date;
     }
 
     /**
@@ -148,19 +178,74 @@ public class RegisterPanel extends javax.swing.JPanel implements java.beans.Cust
         Component frame = null;
         if(DateofBirthTF.getText().length() == 0 || EmailTF.getText().length() == 0 || PasswordTF.getText().length() == 0 || UserNameTF.getText().length() == 0) emptyField = true;
         if(emptyField == true) JOptionPane.showMessageDialog(frame, "You need to fill all the fields to register!!");
-        else{
+        /*else{
             if(TypeCB.getSelectedItem().toString() == "Admin"){
-                
+                Date date = null;
+                try {
+                    date = ConverttoDate(DateofBirthTF.getText());
+                } catch (ParseException ex) {
+                    Logger.getLogger(RegisterPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                int clearance = Integer.parseInt(AdminRegisterPanel.AdminClearanceTF.getText());
+                Admin admin = new Admin(); //(generatedID(),EmailTF.getText(),3,UserNameTF.getText(),date,PasswordTF.getText(),clearance);
+                        admin.setUserID(generatedID()); 
+                        admin.setEmail(EmailTF.getText());
+                        admin.setUserType(3);
+                        admin.setUserName(UserNameTF.getText());
+                        admin.setDateOfBirth(date);
+                        admin.setPassword(PasswordTF.getText());
+                        admin.setClearanceLevel(clearance);
             }
             else if(TypeCB.getSelectedItem().toString() == "Employee"){
-                
+                Date date = null;
+                try {
+                    date = ConverttoDate(DateofBirthTF.getText());
+                } catch (ParseException ex) {
+                    Logger.getLogger(RegisterPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Date startDate = null;
+                try {
+                    startDate = ConverttoDate(EmpStartDateTF.getText());
+                } catch (ParseException ex) {
+                    Logger.getLogger(RegisterPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                int depcode = Integer.parseInt(EmployeeRegisterPanel.EmpDepCodeTF.getText());
+                Employee employee = new Employee(); //(generatedID(),EmailTF.getText(),3,UserNameTF.getText(),date,PasswordTF.getText(),startDate,depcode);
+                        employee.setUserID(generatedID()); 
+                        employee.setEmail(EmailTF.getText());
+                        employee.setUserType(3);
+                        employee.setUserName(UserNameTF.getText());
+                        employee.setDateOfBirth(date);
+                        employee.setPassword(PasswordTF.getText());
+                        employee.setStartDate(startDate);
+                        employee.setDepCode(depcode);
             }
             else if(TypeCB.getSelectedItem().toString() == "Customer"){
-                
+                Date date = null;
+                try {
+                    date = ConverttoDate(DateofBirthTF.getText());
+                } catch (ParseException ex) {
+                    Logger.getLogger(RegisterPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+                String strDate= formatter.format(date);  
+                Date regDate = null;
+                try { 
+                    regDate = ConverttoDate(strDate);
+                } catch (ParseException ex) {
+                    Logger.getLogger(RegisterPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Customer customer = new Customer();//(generatedID(),EmailTF.getText(),3,UserNameTF.getText(),date,PasswordTF.getText(),CustomerRegisterPanel.CustPhoneTF.getText());
+                customer.setUserID(generatedID()); 
+                customer.setEmail(EmailTF.getText());
+                customer.setUserType(3);
+                customer.setUserName(UserNameTF.getText());
+                customer.setDateOfBirth(date);
+                customer.setPassword(PasswordTF.getText());
+                customer.setPhoneNumber(CustomerRegisterPanel.CustPhoneTF.getText());
+                customer.setRegistrationDate(regDate);
             }
-        }
-            
-        
+        } */
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void TypeCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeCBActionPerformed
