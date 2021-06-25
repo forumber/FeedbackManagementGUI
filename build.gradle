@@ -32,4 +32,6 @@ dependencies {
     testImplementation     'junit:junit:4.13'
     implementation files('libs/ojdbc8.jar')
     implementation files('libs/lombok.jar')
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
 }
