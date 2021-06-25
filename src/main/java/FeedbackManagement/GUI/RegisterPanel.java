@@ -5,9 +5,9 @@
  */
 package FeedbackManagement.GUI;
 
-import FeedbackManagement.Admin;
-import FeedbackManagement.Customer;
-import FeedbackManagement.Employee;
+import FeedbackManagement.Models.Admin;
+import FeedbackManagement.Models.Customer;
+import FeedbackManagement.Models.Employee;
 import static FeedbackManagement.GUI.EmployeeRegisterPanel.EmpStartDateTF;
 import java.awt.Component;
 import java.awt.event.ActionListener;

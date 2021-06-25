@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FeedbackManagement;
+package FeedbackManagement.Models;
 
 import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -17,12 +18,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class User {
-    
-   private int userID;
-   private String email;
-   private int userType;
-   private String userName;
-   private Date dateOfBirth;
-   private String password;
+@EqualsAndHashCode(callSuper = true)
+public class Customer extends User {
+    private String phoneNumber;
+    private Date registrationDate;
 }
