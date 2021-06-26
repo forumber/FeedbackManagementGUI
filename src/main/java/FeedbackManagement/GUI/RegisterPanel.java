@@ -32,10 +32,6 @@ public class RegisterPanel extends javax.swing.JPanel {
         initComponents();
         TypeCBActionPerformed(null);
     }
-    
-    public static int generatedID(){
-        return ThreadLocalRandom.current().nextInt(100000, 999999);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,7 +166,7 @@ public class RegisterPanel extends javax.swing.JPanel {
                         newUser = new Employee();
 
                         ((Employee) newUser).setDepCode(Integer.parseInt(((EmployeeRegisterPanel) extraPanel).EmpDepCodeTF.getText()));
-                        ((Employee) newUser).setStartDate((Date) dateFormatter.parse(((EmployeeRegisterPanel) extraPanel).EmpStartDateTF.getText()));
+                        ((Employee) newUser).setStartDate(dateFormatter.parse(((EmployeeRegisterPanel) extraPanel).EmpStartDateTF.getText()));
                         newUser.setUserType(User.UserType.EMPLOYEE);
                         break;
                     }
@@ -178,7 +174,6 @@ public class RegisterPanel extends javax.swing.JPanel {
                         newUser = new Customer();
 
                         ((Customer) newUser).setPhoneNumber(((AdminRegisterPanel) extraPanel).AdminClearanceTF.getText());
-                        //((Customer)newUser).setRegistrationDate(((AdminRegisterPanel)extraPanel).AdminClearanceTF.getText());
                         newUser.setUserType(User.UserType.CUSTOMER);
                         break;
                     }
@@ -186,12 +181,19 @@ public class RegisterPanel extends javax.swing.JPanel {
                         break;
                 }
 
-                //newUser.setDateOfBirth(dateOfBirth);
+                newUser.setDateOfBirth(dateFormatter.parse(DateofBirthTF.getText()));
                 newUser.setEmail(EmailTF.getText());
                 newUser.setPassword(PasswordTF.getText());
-                newUser.setUserID(generatedID());
                 newUser.setUserName(UserNameTF.getText());
+                
+                mainFrame.application.repository.registerUser(newUser);
+                
+                JOptionPane.showMessageDialog(mainFrame, "Created successfully!");
+                
+                mainFrame.changePanel("LoginRegisterSelection");
+                
             } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(mainFrame, "Error on creation!");
             }
         }

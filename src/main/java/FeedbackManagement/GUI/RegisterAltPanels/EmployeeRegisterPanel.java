@@ -34,7 +34,8 @@ public class EmployeeRegisterPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Department Code:");
 
-        EmpStartDateTF.setToolTipText("DD.MM.YYYY");
+        EmpStartDateTF.setText("DD/MM/YYYY");
+        EmpStartDateTF.setToolTipText("DD/MM/YYYY");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

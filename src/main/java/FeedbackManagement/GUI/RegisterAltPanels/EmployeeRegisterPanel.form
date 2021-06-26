@@ -67,7 +67,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="EmpStartDateTF">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="DD.MM.YYYY"/>
+        <Property name="text" type="java.lang.String" value="DD/MM/YYYY"/>
+        <Property name="toolTipText" type="java.lang.String" value="DD/MM/YYYY"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="EmpStartDate"/>
