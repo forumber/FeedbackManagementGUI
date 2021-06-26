@@ -18,11 +18,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class User {
-    
-   private int userID;
-   private String email;
-   private int userType;
-   private String userName;
-   private Date dateOfBirth;
-   private String password;
+
+    public enum UserType {
+        ADMIN,
+        EMPLOYEE,
+        CUSTOMER
+    }
+
+    private int userID;
+    private String email;
+    private UserType userType;
+    private String userName;
+    private Date dateOfBirth;
+    private String password;
 }

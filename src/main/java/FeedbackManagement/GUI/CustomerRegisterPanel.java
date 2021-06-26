@@ -57,7 +57,7 @@ public class CustomerRegisterPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTextField CustPhoneTF;
+    public javax.swing.JTextField CustPhoneTF;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

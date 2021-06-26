@@ -61,7 +61,7 @@ public class AdminRegisterPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTextField AdminClearanceTF;
+    public javax.swing.JTextField AdminClearanceTF;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
