@@ -5,6 +5,9 @@
  */
 package FeedbackManagement.GUI;
 
+import FeedbackManagement.GUI.RegisterAltPanels.CustomerRegisterPanel;
+import FeedbackManagement.GUI.RegisterAltPanels.EmployeeRegisterPanel;
+import FeedbackManagement.GUI.RegisterAltPanels.AdminRegisterPanel;
 import FeedbackManagement.Models.Admin;
 import FeedbackManagement.Models.Customer;
 import FeedbackManagement.Models.Employee;
