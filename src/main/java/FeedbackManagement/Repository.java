@@ -1,30 +1,42 @@
 package FeedbackManagement;
 
 import FeedbackManagement.Models.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.xml.bind.DatatypeConverter;
 
 public class Repository {
     private Connection connection;
+    private final String connectionString = "jdbc:oracle:thin:@localhost:1521:XE";
+    private final String connectionUserName = "applicationuser";
+    private final String connectionPass = "q1w2e3r4t5y6";
     private final String insertToUsersQuery = "INSERT INTO USERS (dateofbirth, email, userid, usertype, usr_name, usr_password) VALUES (?, ?, ?, ?, ?, ?)";
     private final String insertToAdminsQuery = "INSERT INTO ADMINS (clearancelevel, userid) VALUES (?, ?)";
     private final String insertToEmployeesQuery = "INSERT INTO EMPLOYEES (depcode, startdate, userid) VALUES (?, ?, ?)";
     private final String insertToCustomersQuery = "INSERT INTO CUSTOMERS (phonenumber, registrationdate, userid) VALUES (?, ?, ?)";
+    private final String getNextUserIdQuery = "SELECT SEQ_USERS.nextval FROM DUAL";
+    private final String getUserQuery = "SELECT USERID, USERTYPE, USR_NAME, DATEOFBIRTH FROM USERS WHERE email = ? AND usr_password = ?";
+    private final String getAdminQuery = "SELECT clearancelevel FROM ADMINS WHERE userid = ?";
+    private final String getEmployeeQuery = "SELECT depcode, startdate FROM EMPLOYEES WHERE userid = ?";
+    private final String getCustomerQuery = "SELECT phonenumber, registrationdate FROM CUSTOMERS WHERE userid = ?";
     
     public Repository()
     {
         try
         {
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "applicationuser", "q1w2e3r4t5y6");
+            connection = DriverManager.getConnection(connectionString, connectionUserName, connectionPass);
             if (connection == null) {
                 throw new Exception();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Failed to connect DB!");
@@ -34,7 +46,7 @@ public class Repository {
     
     private int getNextUserId() throws SQLException
     {
-        ResultSet result = connection.createStatement().executeQuery("SELECT SEQ_USERS.nextval FROM DUAL");
+        ResultSet result = connection.createStatement().executeQuery(getNextUserIdQuery);
         result.next();
         return result.getInt(1);
     }
@@ -48,7 +60,6 @@ public class Repository {
         insertToUsersStatement.setDate(1, new java.sql.Date(newUser.getDateOfBirth().getTime()));
         insertToUsersStatement.setString(2, newUser.getEmail());
         insertToUsersStatement.setInt(3, newUserId);
-        
         insertToUsersStatement.setString(5, newUser.getUserName());
         insertToUsersStatement.setString(6, newUser.getPassword());
         
@@ -88,6 +99,69 @@ public class Repository {
         
         insertToUsersStatement.executeUpdate();
         insertToSpecificUserStatement.executeUpdate();
+    }
+    
+    public User login(String email, String password) throws SQLException
+    {
+        PreparedStatement statement = connection.prepareStatement(getUserQuery);
+        statement.setString(1, email);
+        statement.setString(2, generateMD5(password));
+        
+        ResultSet result = statement.executeQuery();
+        
+        if (!result.next())
+            return null;
+        
+        User loggedInUser = null;
+        PreparedStatement statement2 = null;
+        
+        int userType = result.getInt("usertype");
+        int userId = result.getInt("userid");
+        
+        switch(userType)
+        {
+            case 1:
+                statement2 = connection.prepareStatement(getCustomerQuery);
+                statement2.setInt(1, userId);
+                ResultSet CustomerResults = statement2.executeQuery();
+                CustomerResults.next();
+                loggedInUser = new Customer(CustomerResults.getString("phonenumber"), CustomerResults.getDate("registrationdate"));
+                loggedInUser.setUserType(User.UserType.CUSTOMER);
+                break;
+            case 2:
+                statement2 = connection.prepareStatement(getEmployeeQuery);
+                statement2.setInt(1, userId);
+                ResultSet EmployeeResults = statement2.executeQuery();
+                EmployeeResults.next();
+                loggedInUser = new Employee(EmployeeResults.getDate("startdate"), EmployeeResults.getInt("depcode"));
+                loggedInUser.setUserType(User.UserType.EMPLOYEE);
+                break;
+            case 3:
+                statement2 = connection.prepareStatement(getAdminQuery);
+                statement2.setInt(1, userId);
+                ResultSet AdminResults = statement2.executeQuery();
+                AdminResults.next();
+                loggedInUser = new Admin(AdminResults.getInt("clearancelevel"));
+                loggedInUser.setUserType(User.UserType.ADMIN);
+                break;
+        }
+        
+        loggedInUser.setDateOfBirth(result.getDate("dateofbirth"));
+        loggedInUser.setEmail(email);
+        loggedInUser.setUserID(userId);
+        loggedInUser.setUserName(result.getString("usr_name"));
+        
+        return loggedInUser;
+    }
+    
+    private static String generateMD5(String stringToGenerate)
+    {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException ex) { }
+        md.update(stringToGenerate.getBytes());
+        return DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
     }
             
 }

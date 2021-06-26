@@ -5,6 +5,11 @@
  */
 package FeedbackManagement.GUI;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Serhat Korkmaz
@@ -38,18 +43,6 @@ public class LoginPanel extends javax.swing.JPanel{
         jLabel1.setText("E-Mail Address: ");
 
         jLabel2.setText("Password:");
-
-        MailTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MailTFActionPerformed(evt);
-            }
-        });
-
-        PasswordPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordPFActionPerformed(evt);
-            }
-        });
 
         LoginButton.setText("Login");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -94,16 +87,33 @@ public class LoginPanel extends javax.swing.JPanel{
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MailTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MailTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MailTFActionPerformed
-
-    private void PasswordPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordPFActionPerformed
-
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            mainFrame.application.loggedInUser = mainFrame.application.repository.login(MailTF.getText(), PasswordPF.getText());
+            
+            if (mainFrame.application.loggedInUser == null)
+            {
+                JOptionPane.showMessageDialog(mainFrame, "Login failed!");
+                return;
+            
+            }
+            JOptionPane.showMessageDialog(mainFrame, "Logged in successfully!");
+            
+            switch(mainFrame.application.loggedInUser.getUserType())
+            {
+                case ADMIN:
+                    break;
+                case CUSTOMER:
+                    break;
+                case EMPLOYEE:
+                    break;
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(mainFrame, "Login failed!");
+            
+        }
     }//GEN-LAST:event_LoginButtonActionPerformed
 
 
