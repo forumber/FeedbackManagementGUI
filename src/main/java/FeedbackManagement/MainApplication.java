@@ -7,7 +7,7 @@ import java.util.concurrent.CompletableFuture;
 public class MainApplication {
     
     public MainFrame mainFrame;
-    public Repository repository;
+    public static Repository repository;
     public User loggedInUser;
     
     public MainApplication()
