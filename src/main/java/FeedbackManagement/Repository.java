@@ -29,7 +29,7 @@ public class Repository {
     private final String insertToEmployeesQuery = "INSERT INTO EMPLOYEES (depcode, startdate, userid) VALUES (?, ?, ?)";
     private final String insertToCustomersQuery = "INSERT INTO CUSTOMERS (phonenumber, registrationdate, userid) VALUES (?, ?, ?)";
     private final String getNextUserIdQuery = "SELECT SEQ_USERS.nextval FROM DUAL";
-    private final String getUserQuery = "SELECT USERID, USERTYPE, USR_NAME, DATEOFBIRTH FROM USERS";
+    private final String getUserQuery = "SELECT * FROM USERS";
     private final String getAdminQuery = "SELECT clearancelevel FROM ADMINS WHERE userid = ?";
     private final String getEmployeeQuery = "SELECT depcode, startdate FROM EMPLOYEES WHERE userid = ?";
     private final String getCustomerQuery = "SELECT phonenumber, registrationdate FROM CUSTOMERS WHERE userid = ?";
