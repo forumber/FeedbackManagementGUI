@@ -261,4 +261,9 @@ public class Repository {
         
         return users;
     }
+    
+    public RepositoryStatistics getRepoStatistics()
+    {
+        return new RepositoryStatistics(connection);
+    }
 }
