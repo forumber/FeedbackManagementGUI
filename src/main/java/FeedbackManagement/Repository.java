@@ -4,11 +4,15 @@ import FeedbackManagement.Models.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,6 +32,8 @@ public class Repository {
     private final String getAdminQuery = "SELECT clearancelevel FROM ADMINS WHERE userid = ?";
     private final String getEmployeeQuery = "SELECT depcode, startdate FROM EMPLOYEES WHERE userid = ?";
     private final String getCustomerQuery = "SELECT phonenumber, registrationdate FROM CUSTOMERS WHERE userid = ?";
+    private final String getResponseQuery = "SELECT * FROM RESPONSES";
+    private final String getFeedbackQuery = "SELECT * FROM FEEDBACKS";
     
     public Repository()
     {
@@ -158,5 +164,88 @@ public class Repository {
     {
         return org.apache.commons.codec.digest.DigestUtils.md5Hex(stringToGenerate).toLowerCase();
     }
+    
+    private ResultSet buildAndRunQuery(Map<String, Object> filters, String SQLQuery) throws SQLException
+    {
+        if (filters == null)
+        {
+            return connection.prepareStatement(SQLQuery).executeQuery();
+        }
+        
+        String query = SQLQuery;
+        for (String columnName : filters.keySet())
+        {
+            query += query.contains("WHERE") ? " AND " : " WHERE ";
+            query += columnName + " = ?";
+        }
+        
+        PreparedStatement statement = connection.prepareStatement(query);
+        
+        int statementIndex = 1;
+        
+        for (String columnName : filters.keySet())
+        {
+            Object arg = filters.get(columnName);
             
+            try
+            {
+                statement.setString(statementIndex, (String)arg);
+            }
+            catch(ClassCastException e1)
+            {
+                try
+                {
+                    statement.setInt(statementIndex, (int)arg);
+                }
+                catch(ClassCastException e2)
+                {
+                    statement.setDate(statementIndex, new java.sql.Date(((java.util.Date)arg).getTime()));
+                }
+            }
+            
+            statementIndex++;
+        }
+        
+        return statement.executeQuery();
+    }
+    
+    public List<Response> getResponses(Map<String, Object> filters) throws SQLException
+    {
+        ResultSet result = buildAndRunQuery(filters, getResponseQuery);
+        
+        List<Response> responses = new ArrayList();
+        
+        while (result.next())
+        {
+            responses.add(new Response(result.getInt("responseid"),
+                    result.getString("answer"),
+                    result.getDate("response_date"),
+                    result.getString("status"),
+                    result.getInt("feedid"),
+                    result.getInt("empid")));
+        }
+        
+        return responses;
+    }
+    
+    public List<Feedback> getFeedbacks(Map<String, Object> filters) throws SQLException
+    {
+        ResultSet result = buildAndRunQuery(filters, getResponseQuery);
+        
+        List<Feedback> feedbacks = new ArrayList();
+        
+        while (result.next())
+        {
+            feedbacks.add(new Feedback(result.getInt("feedbackid"), 
+                    result.getString("message"), 
+                    result.getString("status"), 
+                    result.getInt("empid"), 
+                    result.getInt("depcode"), 
+                    result.getInt("customerid"), 
+                    result.getInt("catid"), 
+                    result.getDate("fd_date")));
+        }
+        
+        return feedbacks;
+    }
 }
