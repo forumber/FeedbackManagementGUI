@@ -3,24 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TableModels;
+package FeedbackManagement.Table.Models;
 
+import FeedbackManagement.Models.Feedback;
 import FeedbackManagement.Models.User;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Burak Korkmaz
+ * @author Serhat Korkmaz
  */
-public class UserTableModel extends AbstractTableModel {
-   private String[] columnNames = {"User ID","E-Mail","User Type","User Name","User DoB","User Password(MD5)"};
-   private ArrayList<User> myList = new ArrayList();
+public class FeedbackTableModel extends AbstractTableModel {
+   private String[] columnNames = {"Feedback ID","Message","Status","Employee ID","Department Code","Customer ID","Category ID","Feedback Date"};
+   private ArrayList<Feedback> myList = new ArrayList();
    
    
-      public UserTableModel(List<User> list){
-         this.myList = (ArrayList<User>) list;
+      public FeedbackTableModel(List<Feedback> list){
+         this.myList = (ArrayList<Feedback>) list;
     }
    public int getColumnCount() {
       return columnNames.length;
@@ -36,20 +38,24 @@ public class UserTableModel extends AbstractTableModel {
       return size;
    }
    public Object getValueAt(int row, int col) {
-      User user = myList.get(row);
+      Feedback feedback = myList.get(row);
         switch (col) {
             case 0: 
-                return user.getUserID();
+                return feedback.getFeedbackID();
             case 1:
-                return user.getEmail();
+                return feedback.getMessage();
             case 2:
-                return user.getUserType();
+                return feedback.getStatus();
             case 3:
-                return user.getUserName();
+                return feedback.getEmpID();
             case 4:
-                return user.getDateOfBirth();
+                return feedback.getDepCode();
             case 5:
-                return user.getPassword();
+                return feedback.getCustomerID();
+            case 6:
+                return feedback.getCategoryID();
+            case 7:
+                return feedback.getFeedbackDate();
            }
            return null;
    }
@@ -61,13 +67,17 @@ public class UserTableModel extends AbstractTableModel {
              case 1:
                return String.class;
              case 2:
-               return Enum.class;
+               return String.class;
              case 3:
-               return String.class;
+               return Integer.class;
              case 4:
-               return String.class;
+               return Integer.class;
              case 5:
-               return String.class;
+               return Integer.class;
+             case 6:
+               return Integer.class;
+             case 7:
+               return Date.class;
              }
              return null;
       }

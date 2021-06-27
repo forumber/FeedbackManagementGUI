@@ -3,28 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FeedbackManagementTables;
+package FeedbackManagement.Tables;
 
 import FeedbackManagement.GUI.MainFrame;
 import FeedbackManagement.Models.Feedback;
 import FeedbackManagement.Models.User;
-import TableModels.FeedbackTableModel;
-import TableModels.UserTableModel;
+import FeedbackManagement.Table.Models.FeedbackTableModel;
+import FeedbackManagement.Table.Models.UserTableModel;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Serhat Korkmaz
  */
-public class UserTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
-    
-    private Object bean;
-    HashMap<String, String> Filter = new HashMap<String, String>();
+public class UserTablePanel extends javax.swing.JPanel{
+
+   
     /**
      * Creates new customizer UserTablePanel
      */
@@ -36,10 +40,11 @@ public class UserTablePanel extends javax.swing.JPanel implements java.beans.Cus
         jScrollPane1.setViewportView(jTable1);
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
+    public Date convertToDate(String s) throws ParseException{
+        SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
+        Date date=formatter1.parse(s);
+        return date;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,36 +173,38 @@ public class UserTablePanel extends javax.swing.JPanel implements java.beans.Cus
     }//GEN-LAST:event_UserNameTFActionPerformed
 
     private void FilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterButtonActionPerformed
-        Filter = new HashMap<String, String>();
-        if(UserDoBTF.getText().isEmpty() && UserIDTF.getText().isEmpty() && UserNameTF.getText().isEmpty() && UserTypeCB.getSelectedItem().toString() == "All") 
-            JOptionPane.showMessageDialog(null, "You need to fill a field to filter!!");
-        else{
-            if(!UserIDTF.getText().isEmpty()){
-                Filter.put("USERID = ", UserIDTF.getText());
-            }
-            if(!UserDoBTF.getText().isEmpty()){
-                Filter.put("DATEOFBIRTH = ", UserDoBTF.getText());
-            }
-            if(!UserNameTF.getText().isEmpty()){
-                Filter.put("USR_NAME = ", UserNameTF.getText());
-            }
-            if(UserTypeCB.getSelectedItem().toString() != "All"){
-                switch (UserTypeCB.getSelectedItem().toString()) {
-                    case "Admin":
-                        Filter.put("USERTYPE = ", "3");
-                        break;
-                    case "Employee":
-                        Filter.put("USERTYPE = ", "2");
-                        break;
-                    case "Customer":
-                        Filter.put("USERTYPE = ", "1");
-                        break;
-                    default:
-                        break;
-                }
-            }
-            //Send the filter somewhere 
+        HashMap<String, Object> Filter = new HashMap<String, Object>();
+
+        if (!UserIDTF.getText().isEmpty()) {
+            Filter.put("USERID", Integer.parseInt(UserIDTF.getText()));
         }
+        if (!UserDoBTF.getText().isEmpty()) {
+            try {
+                Filter.put("DATEOFBIRTH", convertToDate(UserDoBTF.getText()));
+            } catch (ParseException ex) {
+                Logger.getLogger(UserTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (!UserNameTF.getText().isEmpty()) {
+            Filter.put("USR_NAME", UserNameTF.getText());
+        }
+        if (UserTypeCB.getSelectedItem().toString() != "All") {
+            switch (UserTypeCB.getSelectedItem().toString()) {
+                case "Admin":
+                    Filter.put("USERTYPE", 3);
+                    break;
+                case "Employee":
+                    Filter.put("USERTYPE", 2);
+                    break;
+                case "Customer":
+                    Filter.put("USERTYPE", 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+        //Send the filter somewhere 
+
     }//GEN-LAST:event_FilterButtonActionPerformed
 
 

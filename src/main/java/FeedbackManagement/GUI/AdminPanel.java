@@ -5,9 +5,9 @@
  */
 package FeedbackManagement.GUI;
 
-import FeedbackManagementTables.FeedbackTablePanel;
-import FeedbackManagementTables.ResponseTablePanel;
-import FeedbackManagementTables.UserTablePanel;
+import FeedbackManagement.Tables.FeedbackTablePanel;
+import FeedbackManagement.Tables.ResponseTablePanel;
+import FeedbackManagement.Tables.UserTablePanel;
     
 /**
  *
@@ -41,6 +41,9 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
                 break;
             case "Response":
                 tablePanel = new ResponseTablePanel();
+                break;
+            case "Statistics":
+                tablePanel = new StatisticsPanel();
                 break;
             default:
                 break;
@@ -139,7 +142,7 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
     }//GEN-LAST:event_ResponsesButtonActionPerformed
 
     private void StatisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatisticsButtonActionPerformed
-        // TODO add your handling code here:
+       ChangePanel("Statistics");
     }//GEN-LAST:event_StatisticsButtonActionPerformed
 
 

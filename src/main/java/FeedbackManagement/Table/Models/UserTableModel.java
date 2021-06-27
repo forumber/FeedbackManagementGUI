@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TableModels;
+package FeedbackManagement.Table.Models;
 
-import FeedbackManagement.Models.Feedback;
-import FeedbackManagement.Models.Response;
-import java.sql.Date;
+import FeedbackManagement.Models.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Burak Korkmaz
+ * @author Serhat Korkmaz
  */
-public class ResponseTableModel extends AbstractTableModel {
-   private String[] columnNames = {"Response ID","Answer","Response Date","Status","Feedback ID","Employee ID"};
-   private ArrayList<Response> myList = new ArrayList();
+public class UserTableModel extends AbstractTableModel {
+   private String[] columnNames = {"User ID","E-Mail","User Type","User Name","User DoB","User Password(MD5)"};
+   private ArrayList<User> myList = new ArrayList();
    
    
-      public ResponseTableModel(List<Response> list){
-         this.myList = (ArrayList<Response>) list;
+      public UserTableModel(List<User> list){
+         this.myList = (ArrayList<User>) list;
     }
    public int getColumnCount() {
       return columnNames.length;
@@ -38,20 +36,20 @@ public class ResponseTableModel extends AbstractTableModel {
       return size;
    }
    public Object getValueAt(int row, int col) {
-      Response response = myList.get(row);
+      User user = myList.get(row);
         switch (col) {
             case 0: 
-                return response.getResponseID();
+                return user.getUserID();
             case 1:
-                return response.getAnswer();
+                return user.getEmail();
             case 2:
-                return response.getResponseDate();
+                return user.getUserType();
             case 3:
-                return response.getStatus();
+                return user.getUserName();
             case 4:
-                return response.getFeedID();
+                return user.getDateOfBirth();
             case 5:
-                return response.getEmpID();
+                return user.getPassword();
            }
            return null;
    }
@@ -63,13 +61,13 @@ public class ResponseTableModel extends AbstractTableModel {
              case 1:
                return String.class;
              case 2:
-               return Date.class;
+               return Enum.class;
              case 3:
                return String.class;
              case 4:
-               return Integer.class;
+               return String.class;
              case 5:
-               return Integer.class;
+               return String.class;
              }
              return null;
       }

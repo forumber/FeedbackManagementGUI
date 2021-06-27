@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FeedbackManagementTables;
+package FeedbackManagement.Tables;
 
 import FeedbackManagement.Models.Feedback;
 import FeedbackManagement.Models.Response;
-import TableModels.FeedbackTableModel;
-import TableModels.ResponseTableModel;
+import FeedbackManagement.Table.Models.FeedbackTableModel;
+import FeedbackManagement.Table.Models.ResponseTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -19,11 +24,10 @@ import javax.swing.table.TableModel;
  *
  * @author Serhat Korkmaz
  */
-public class ResponseTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
+public class ResponseTablePanel extends javax.swing.JPanel{
     
     private Object bean;
-    HashMap<String, String> Filter = new HashMap<String, String>();
-
+   
     /**
      * Creates new customizer ResponseTablePanel
      */
@@ -35,8 +39,10 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
         jScrollPane1.setViewportView(jTable1);
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
+     public Date convertToDate(String s) throws ParseException{
+        SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
+        Date date=formatter1.parse(s);
+        return date;
     }
 
     /**
@@ -160,39 +166,42 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
     }//GEN-LAST:event_responseDateTFActionPerformed
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
-        Filter = new HashMap<String, String>();
-        if(FeedbackIDTF.getText().isEmpty() && employeeID.getText().isEmpty() && responseDateTF.getText().isEmpty() && responseIDTF.getText().isEmpty() && feedbackStatusCB.getSelectedItem().toString() == "All") 
-            JOptionPane.showMessageDialog(null, "You need to fill a field to filter!!");
-        else{
+         HashMap<String, Object> Filter = new HashMap<String, Object>();
+
+        
             if(!FeedbackIDTF.getText().isEmpty()){
-                Filter.put("FEEDID = ", FeedbackIDTF.getText());
+                Filter.put("FEEDID", Integer.parseInt(FeedbackIDTF.getText()));
             }
             if(!employeeID.getText().isEmpty()){
-                Filter.put("EMPID = ", employeeID.getText());
+                Filter.put("EMPID", Integer.parseInt(employeeID.getText()));
             }
             if(!responseDateTF.getText().isEmpty()){
-                Filter.put("RESPONSE_DATE = ", responseDateTF.getText());
+             try {
+                 Filter.put("RESPONSE_DATE", convertToDate(responseDateTF.getText()));
+             } catch (ParseException ex) {
+                 Logger.getLogger(ResponseTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+             }
             }
             if(!responseIDTF.getText().isEmpty()){
-                Filter.put("RESPONSEID = ", responseIDTF.getText());
+                Filter.put("RESPONSEID", Integer.parseInt(responseIDTF.getText()));
             }
             if(feedbackStatusCB.getSelectedItem().toString() != "All"){
                 switch (feedbackStatusCB.getSelectedItem().toString()) {
                     case "Done Success":
-                        Filter.put("STATUS = ", "DONE_SUCCESS");
+                        Filter.put("STATUS", "DONE_SUCCESS");
                         break;
                     case "Done Fail":
-                        Filter.put("STATUS = ", "DONE_FAIL");
+                        Filter.put("STATUS", "DONE_FAIL");
                         break;
                     case "Responded":
-                        Filter.put("STATUS = ", "RESPONDED");
+                        Filter.put("STATUS", "RESPONDED");
                         break;
                     default:
                         break;
                 }
             }
             //Send the filter somewhere 
-        }
+       
     }//GEN-LAST:event_filterButtonActionPerformed
 
 

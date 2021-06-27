@@ -13,9 +13,8 @@ import javax.swing.JOptionPane;
  *
  * @author Serhat Korkmaz
  */
-public class NewResponseFrame extends javax.swing.JPanel implements java.beans.Customizer {
+public class NewResponseFrame extends javax.swing.JPanel  {
     
-    private Object bean;
     private final MainFrame mainFrame;
 
     /**
@@ -26,9 +25,7 @@ public class NewResponseFrame extends javax.swing.JPanel implements java.beans.C
         initComponents();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

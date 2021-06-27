@@ -5,8 +5,9 @@
  */
 package FeedbackManagement.GUI;
 
-import FeedbackManagementTables.FeedbackTablePanel;
-import FeedbackManagementTables.ResponseTablePanel;
+import FeedbackManagement.Tables.FeedbackTablePanel;
+import FeedbackManagement.Tables.ResponseTablePanel;
+import javax.swing.JFrame;
 
 /**
  *
@@ -119,7 +120,9 @@ public class EmployeePanel extends javax.swing.JPanel implements java.beans.Cust
     }//GEN-LAST:event_myResponsesButtonActionPerformed
 
     private void newResponseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newResponseButtonActionPerformed
-        // TODO add your handling code here:
+        NewResponseFrame frame = new NewResponseFrame(mainFrame);    
+        frame.setSize(280, 380);
+        frame.setVisible(true);  
     }//GEN-LAST:event_newResponseButtonActionPerformed
 
 

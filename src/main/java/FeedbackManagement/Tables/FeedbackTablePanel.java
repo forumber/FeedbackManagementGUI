@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FeedbackManagementTables;
+package FeedbackManagement.Tables;
 
 import FeedbackManagement.Models.Feedback;
-import TableModels.FeedbackTableModel;
+import FeedbackManagement.Table.Models.FeedbackTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -20,7 +25,6 @@ import javax.swing.table.TableModel;
 public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
     
     private Object bean;
-    HashMap<String, String> Filter = new HashMap<String, String>();
     /**
      * Creates new customizer FeedbackTablePanel
      */
@@ -29,12 +33,18 @@ public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans
         List<Feedback> myList = null; // list here
         TableModel tableModel = new FeedbackTableModel(myList);
         jTable1 = new JTable(tableModel);
+        jScrollPane1.setViewportView(jTable1);
     }
     
     public void setObject(Object bean) {
         this.bean = bean;
     }
 
+    public Date convertToDate(String s) throws ParseException{
+        SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
+        Date date=formatter1.parse(s);
+        return date;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,48 +194,50 @@ public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans
     }// </editor-fold>//GEN-END:initComponents
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
-        Filter = new HashMap<String, String>();
-        if(feedbackCatIDTF.getText().isEmpty() && feedbackCusIDTF.getText().isEmpty() && feedbackDateTF.getText().isEmpty() && feedbackDepTF.getText().isEmpty() && feedbackEmpIDTF.getText().isEmpty() && feedbackIDTF.getText().isEmpty() && feedbackStatusCB.getSelectedItem().toString() == "ALL") 
-            JOptionPane.showMessageDialog(null, "You need to fill a field to filter!!");
-        else{
+        HashMap<String, Object> Filter = new HashMap<String, Object>();
             if(!feedbackCatIDTF.getText().isEmpty()){
-                Filter.put("CATID = ", feedbackCatIDTF.getText());
+                Filter.put("CATID", Integer.parseInt(feedbackCatIDTF.getText()));
             }
             if(!feedbackCusIDTF.getText().isEmpty()){
-                Filter.put("CUSTOMERID = ", feedbackCusIDTF.getText());
+                Filter.put("CUSTOMERID", Integer.parseInt(feedbackCusIDTF.getText()));
             }
             if(!feedbackDateTF.getText().isEmpty()){
-                Filter.put("FD_DATE = ", feedbackDateTF.getText());
+                try {
+                Filter.put("FD_DATE", convertToDate(feedbackDateTF.getText()));
+                } 
+                catch (ParseException ex) {
+                Logger.getLogger(FeedbackTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if(!feedbackDepTF.getText().isEmpty()){
-                Filter.put("DEP_CODE = ", feedbackDepTF.getText());
+                Filter.put("DEP_CODE", Integer.parseInt(feedbackDepTF.getText()));
             }
             if(!feedbackEmpIDTF.getText().isEmpty()){
-                Filter.put("EMPID = ", feedbackEmpIDTF.getText());
+                Filter.put("EMPID", Integer.parseInt(feedbackEmpIDTF.getText()));
             }
             if(!feedbackIDTF.getText().isEmpty()){
-                Filter.put("FEEDBACKID = ", feedbackIDTF.getText());
+                Filter.put("FEEDBACKID", Integer.parseInt(feedbackIDTF.getText()));
             }
             if(feedbackStatusCB.getSelectedItem().toString() != "ALL"){
                 switch (feedbackStatusCB.getSelectedItem().toString()) {
                     case "DONE_SUCCESS":
-                        Filter.put("STATUS = ", "DONE_SUCCESS");
+                        Filter.put("STATUS", "DONE_SUCCESS");
                         break;
                     case "DONE_FAIL":
-                        Filter.put("STATUS = ", "DONE_FAIL");
+                        Filter.put("STATUS", "DONE_FAIL");
                         break;
                     case "RESPONDED":
-                        Filter.put("STATUS = ", "RESPONDED");
+                        Filter.put("STATUS", "RESPONDED");
                         break;
                     case "SENT":
-                        Filter.put("STATUS = ", "SENT");
+                        Filter.put("STATUS", "SENT");
                         break;
                     default:
                         break;
                 }
             }
             //Send the filter somewhere 
-        }
+        
     }//GEN-LAST:event_filterButtonActionPerformed
 
 

@@ -12,9 +12,8 @@ import javax.swing.JOptionPane;
  *
  * @author Serhat Korkmaz
  */
-public class NewFeedbackFrame extends javax.swing.JFrame implements java.beans.Customizer {
+public class NewFeedbackFrame extends javax.swing.JFrame{
     
-    private Object bean;
     private final MainFrame mainFrame;
     /**
      * Creates new customizer FeedbackPanel
@@ -22,10 +21,6 @@ public class NewFeedbackFrame extends javax.swing.JFrame implements java.beans.C
     public NewFeedbackFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
 
     /**
@@ -76,8 +71,8 @@ public class NewFeedbackFrame extends javax.swing.JFrame implements java.beans.C
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -123,7 +118,7 @@ public class NewFeedbackFrame extends javax.swing.JFrame implements java.beans.C
                     .addComponent(categoryCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(feedbackTF, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SendB)
                 .addContainerGap())
         );

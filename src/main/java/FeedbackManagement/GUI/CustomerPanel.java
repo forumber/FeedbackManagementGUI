@@ -5,9 +5,11 @@
  */
 package FeedbackManagement.GUI;
 
-import FeedbackManagementTables.FeedbackTablePanel;
-import FeedbackManagementTables.ResponseTablePanel;
-import FeedbackManagementTables.UserTablePanel;
+import FeedbackManagement.Tables.FeedbackTablePanel;
+import FeedbackManagement.Tables.ResponseTablePanel;
+import FeedbackManagement.Tables.UserTablePanel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -121,7 +123,9 @@ public class CustomerPanel extends javax.swing.JPanel implements java.beans.Cust
     }//GEN-LAST:event_responseButtonActionPerformed
 
     private void newFeedbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFeedbackButtonActionPerformed
-        // TODO add your handling code here:
+        NewFeedbackFrame frame = new NewFeedbackFrame(mainFrame);    
+        frame.setSize(280, 380);
+        frame.setVisible(true);  
     }//GEN-LAST:event_newFeedbackButtonActionPerformed
 
 
