@@ -12,6 +12,7 @@ import FeedbackManagement.Models.Admin;
 import FeedbackManagement.Models.Customer;
 import FeedbackManagement.Models.Employee;
 import FeedbackManagement.Models.User;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -187,7 +188,9 @@ public class RegisterPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(mainFrame, "Created successfully!");
                 
                 mainFrame.changePanel("LoginRegisterSelection");
-                
+            } catch (java.sql.SQLIntegrityConstraintViolationException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(mainFrame, "Email is already being used!");
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(mainFrame, "Error on creation!");

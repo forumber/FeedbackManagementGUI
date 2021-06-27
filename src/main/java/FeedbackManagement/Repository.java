@@ -61,7 +61,7 @@ public class Repository {
         insertToUsersStatement.setString(2, newUser.getEmail());
         insertToUsersStatement.setInt(3, newUserId);
         insertToUsersStatement.setString(5, newUser.getUserName());
-        insertToUsersStatement.setString(6, newUser.getPassword());
+        insertToUsersStatement.setString(6, generateMD5(newUser.getPassword()));
         
         PreparedStatement insertToSpecificUserStatement = null;
         
@@ -156,12 +156,7 @@ public class Repository {
     
     private static String generateMD5(String stringToGenerate)
     {
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException ex) { }
-        md.update(stringToGenerate.getBytes());
-        return DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
+        return org.apache.commons.codec.digest.DigestUtils.md5Hex(stringToGenerate).toLowerCase();
     }
             
 }

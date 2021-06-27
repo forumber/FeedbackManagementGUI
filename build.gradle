@@ -30,7 +30,9 @@ run{
 
 dependencies {
     testImplementation     'junit:junit:4.13'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation files('libs/ojdbc8.jar')
+    implementation files('libs/lombok.jar')
+    implementation files('libs/commons-codec-1.15.jar')
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
