@@ -5,6 +5,8 @@
  */
 package FeedbackManagement.GUI;
 
+import FeedbackManagement.MainApplication;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,14 +27,20 @@ public class StatisticsPanel extends javax.swing.JPanel{
      */
     public StatisticsPanel() {
         initComponents();
-        initTables();
-        ResponseRateLabel.setText(""); //return query here
+        try {
+            initTables();
+        } catch (SQLException ex) {
+            Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
    
     
-    public void initTables(){
-        List<String[]> customer = null;; // get
-        List<String[]> avgfeed = null;; //get
+    public void initTables() throws SQLException{
+        
+        List<String[]> customer = MainApplication.repository.getRepoStatistics().getNumberOfCustomersThatHaveNotYetBeenReponded();
+        List<String[]> avgfeed = MainApplication.repository.getRepoStatistics().getAverageNumberOfDailyFeedbackReceivedForEachDepartmentInTheLastMonth();
+        ResponseRateLabel.setText(MainApplication.repository.getRepoStatistics().getResponseRateToTotalFeedbacks().toString());
         
         String data2[][] = null;
         String data3[][] = null;
@@ -57,10 +65,15 @@ public class StatisticsPanel extends javax.swing.JPanel{
         jScrollPane4.setViewportView(DailyFeedbackTable);
     }
     
-    public Date convertToDate(String s) throws ParseException{
-        SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
-        Date date=formatter1.parse(s);
-        return date;
+    public Date convertToDate(String s){
+        try {
+            SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");
+            Date date=formatter1.parse(s);
+            return date;
+        } catch (ParseException ex) {
+            Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     /**
@@ -231,28 +244,25 @@ public class StatisticsPanel extends javax.swing.JPanel{
 
     private void GetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetButtonActionPerformed
         if(startDateTF.getText().isEmpty() || endDateTF.getText().isEmpty())
-            JOptionPane.showMessageDialog(null,"You need to fill all the fields to register!!");
+            JOptionPane.showMessageDialog(null,"You need to fill all the fields");
         else{
             try {
                 Date startDate = convertToDate(startDateTF.getText());
-            } catch (ParseException ex) {
-                Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
                 Date endDate = convertToDate(endDateTF.getText());
-            } catch (ParseException ex) {
+                
+                List<String[]> bestemp = MainApplication.repository.getRepoStatistics().getEmployeeWhoGaveTheMostResponseForEachDepartmentWithinTheSpecifiedDays(startDate, endDate); // get
+                String data1[][] = null;
+                for(int i = 0 ; i < bestemp.size() ; i++){
+                    //data1[i][0] = List.get(i).[0];
+                    //data1[i][1] = List.get(i).[1];
+                    //data1[i][2] = List.get(i).[2];
+                }
+                String column1[]={"Department","Employee","#Responses"};
+                BestEmployeeTable = new JTable(data1,column1);
+                jScrollPane2.setViewportView(BestEmployeeTable);
+            } catch (SQLException ex) {
                 Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            List<String[]> bestemp = null; // get
-            String data1[][] = null;
-            for(int i = 0 ; i < bestemp.size() ; i++){
-                //data1[i][0] = List.get(i).[0];
-                //data1[i][1] = List.get(i).[1];
-                //data1[i][2] = List.get(i).[2];
-            }
-            String column1[]={"Department","Employee","#Responses"};   
-            BestEmployeeTable = new JTable(data1,column1);  
-            jScrollPane2.setViewportView(BestEmployeeTable);
         } 
     }//GEN-LAST:event_GetButtonActionPerformed
 

@@ -6,10 +6,12 @@
 package FeedbackManagement.Tables;
 
 import FeedbackManagement.GUI.MainFrame;
+import FeedbackManagement.MainApplication;
 import FeedbackManagement.Models.Feedback;
 import FeedbackManagement.Models.User;
 import FeedbackManagement.Table.Models.FeedbackTableModel;
 import FeedbackManagement.Table.Models.UserTableModel;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,14 +30,21 @@ import java.util.logging.Logger;
  */
 public class UserTablePanel extends javax.swing.JPanel{
 
+    
+    List<User> userList;
    
     /**
      * Creates new customizer UserTablePanel
      */
     public UserTablePanel() {
         initComponents();
-        List<User> myList = new ArrayList(); // list here
-        TableModel tableModel = new UserTableModel(myList);
+        userList = null;
+        try {
+            userList = MainApplication.repository.getUsers(null);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TableModel tableModel = new UserTableModel(userList);
         jTable1 = new JTable(tableModel);
         jScrollPane1.setViewportView(jTable1);
     }
@@ -203,7 +212,14 @@ public class UserTablePanel extends javax.swing.JPanel{
                     break;
             }
         }
-        //Send the filter somewhere 
+        try {
+            userList = MainApplication.repository.getUsers(Filter);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TableModel tableModel = new UserTableModel(userList);
+        jTable1 = new JTable(tableModel);
+        jScrollPane1.setViewportView(jTable1);
 
     }//GEN-LAST:event_FilterButtonActionPerformed
 

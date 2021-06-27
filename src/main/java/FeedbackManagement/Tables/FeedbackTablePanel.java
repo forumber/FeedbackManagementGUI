@@ -5,8 +5,10 @@
  */
 package FeedbackManagement.Tables;
 
+import FeedbackManagement.MainApplication;
 import FeedbackManagement.Models.Feedback;
 import FeedbackManagement.Table.Models.FeedbackTableModel;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,15 +26,21 @@ import javax.swing.table.TableModel;
  */
 public class FeedbackTablePanel extends javax.swing.JPanel{
     
+    List<Feedback> feedbackList = null;
+    
     /**
      * Creates new customizer FeedbackTablePanel
      */
     public FeedbackTablePanel() {
         initComponents();
-        List<Feedback> myList = null; // list here
-        TableModel tableModel = new FeedbackTableModel(myList);
-        jTable1 = new JTable(tableModel);
-        jScrollPane1.setViewportView(jTable1);
+        try {
+            feedbackList = MainApplication.repository.getFeedbacks(null);
+            TableModel tableModel = new FeedbackTableModel(feedbackList);
+            jTable1 = new JTable(tableModel);
+            jScrollPane1.setViewportView(jTable1);
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Date convertToDate(String s) throws ParseException{
@@ -230,7 +238,14 @@ public class FeedbackTablePanel extends javax.swing.JPanel{
                     break;
             }
         }
-        //Send the filter somewhere 
+        try {
+            feedbackList = MainApplication.repository.getFeedbacks(Filter);
+            TableModel tableModel = new FeedbackTableModel(feedbackList);
+            jTable1 = new JTable(tableModel);
+            jScrollPane1.setViewportView(jTable1);
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_filterButtonActionPerformed
 
