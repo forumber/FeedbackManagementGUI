@@ -36,7 +36,7 @@ public class RepositoryStatistics {
                 " INNER JOIN DEPARTMENTS dp",
                 "    ON emp.depcode = dp.departmentcode",
                 " WHERE (rp.response_date > ? AND",
-                "       rp.response_date < ?",
+                "       rp.response_date < ?)",
                 " GROUP BY dp.departmentname, us.usr_name",
                 "HAVING COUNT(rp.responseid) = (SELECT MAX(tt1.COUNT_RP) AS COUNT_RPM",
                 "                                 FROM (SELECT dp.departmentname,",
@@ -52,9 +52,9 @@ public class RepositoryStatistics {
                 "                                        WHERE (rp.response_date >",
                 "                                              ? AND",
                 "                                              rp.response_date <",
-                "                                              ?",
+                "                                              ?)",
                 "                                        GROUP BY dp.departmentname,",
-                "                                                 us.usr_name) tt1))",
+                "                                                 us.usr_name) tt1)",
                 "");
         
         PreparedStatement statement =  connection.prepareStatement(query);
