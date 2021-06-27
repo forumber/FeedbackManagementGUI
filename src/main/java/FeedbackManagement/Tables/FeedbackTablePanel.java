@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,9 +33,27 @@ public class FeedbackTablePanel extends javax.swing.JPanel{
      * Creates new customizer FeedbackTablePanel
      */
     public FeedbackTablePanel() {
+        Map<String, Object> filter = null;
+        
         initComponents();
         try {
-            feedbackList = MainApplication.repository.getFeedbacks(null);
+            switch (MainApplication.loggedInUser.getUserType())
+            {
+                case ADMIN:
+                    feedbackList = MainApplication.repository.getFeedbacks(null);
+                    break;
+                case CUSTOMER:
+                    filter = new HashMap();
+                    filter.put("customerid", MainApplication.loggedInUser.getUserID());
+                    feedbackList = MainApplication.repository.getFeedbacks(filter);
+                    break;
+                case EMPLOYEE:
+                    filter = new HashMap();
+                    filter.put("empid", MainApplication.loggedInUser.getUserID());
+                    feedbackList = MainApplication.repository.getFeedbacks(filter);
+                    break;
+            }
+
             TableModel tableModel = new FeedbackTableModel(feedbackList);
             jTable1 = new JTable(tableModel);
             jScrollPane1.setViewportView(jTable1);
@@ -238,6 +257,18 @@ public class FeedbackTablePanel extends javax.swing.JPanel{
                     break;
             }
         }
+        switch (MainApplication.loggedInUser.getUserType())
+        {
+            case ADMIN:
+                break;
+            case CUSTOMER:
+                Filter.put("customerid", MainApplication.loggedInUser.getUserID());
+                break;
+            case EMPLOYEE:
+                Filter.put("empid", MainApplication.loggedInUser.getUserID());
+                break;
+        }
+        
         try {
             feedbackList = MainApplication.repository.getFeedbacks(Filter);
             TableModel tableModel = new FeedbackTableModel(feedbackList);
