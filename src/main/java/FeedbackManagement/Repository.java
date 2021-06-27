@@ -29,12 +29,14 @@ public class Repository {
     private final String insertToEmployeesQuery = "INSERT INTO EMPLOYEES (depcode, startdate, userid) VALUES (?, ?, ?)";
     private final String insertToCustomersQuery = "INSERT INTO CUSTOMERS (phonenumber, registrationdate, userid) VALUES (?, ?, ?)";
     private final String getNextUserIdQuery = "SELECT SEQ_USERS.nextval FROM DUAL";
+    private final String getNextFeedbackIdQuery = "SELECT SEQ_FEEDBACKS.nextval FROM DUAL";
     private final String getUserQuery = "SELECT * FROM USERS";
     private final String getAdminQuery = "SELECT clearancelevel FROM ADMINS WHERE userid = ?";
     private final String getEmployeeQuery = "SELECT depcode, startdate FROM EMPLOYEES WHERE userid = ?";
     private final String getCustomerQuery = "SELECT phonenumber, registrationdate FROM CUSTOMERS WHERE userid = ?";
     private final String getResponseQuery = "SELECT * FROM RESPONSES";
     private final String getFeedbackQuery = "SELECT * FROM FEEDBACKS";
+    private final String postNewFeedbackQuery = "INSERT INTO FEEDBACKS (catýd, customerýd, depcode, empýd, fd_date, feedbackýd, message, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
     public Repository()
     {
@@ -51,9 +53,33 @@ public class Repository {
         }
     }
     
+    public void postNewFeedback(Feedback newFeedback) throws SQLException
+    {
+        PreparedStatement insertStatement =  connection.prepareStatement(postNewFeedbackQuery);
+        insertStatement.setInt(1, newFeedback.getCategoryID());
+        insertStatement.setInt(2, newFeedback.getCustomerID());
+        insertStatement.setInt(3, newFeedback.getDepCode());
+        insertStatement.setInt(4, 5162); // FIX ME
+        insertStatement.setDate(5, java.sql.Date.valueOf(LocalDate.now()));
+        insertStatement.setInt(6, getNextFeedbackId());
+        insertStatement.setString(7, newFeedback.getMessage());
+        insertStatement.setString(8, "SENT");
+        
+        insertStatement.executeUpdate();
+        
+        
+    }
+    
     private int getNextUserId() throws SQLException
     {
         ResultSet result = connection.createStatement().executeQuery(getNextUserIdQuery);
+        result.next();
+        return result.getInt(1);
+    }
+    
+    private int getNextFeedbackId() throws SQLException
+    {
+        ResultSet result = connection.createStatement().executeQuery(getNextFeedbackIdQuery);
         result.next();
         return result.getInt(1);
     }

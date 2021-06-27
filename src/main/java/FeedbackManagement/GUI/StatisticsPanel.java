@@ -61,8 +61,8 @@ public class StatisticsPanel extends javax.swing.JPanel{
         CustomerNotRespondedTable = new JTable(data2,column2); 
         DailyFeedbackTable  = new JTable(data3,column3);     
         
-        jScrollPane3.setViewportView(CustomerNotRespondedTable);
-        jScrollPane4.setViewportView(DailyFeedbackTable);
+//        jScrollPane3.setViewportView(CustomerNotRespondedTable);
+//        jScrollPane4.setViewportView(DailyFeedbackTable);
     }
     
     public Date convertToDate(String s){

@@ -170,7 +170,7 @@ public class RegisterPanel extends javax.swing.JPanel {
                     case "Customer": {
                         newUser = new Customer();
 
-                        ((Customer) newUser).setPhoneNumber(((AdminRegisterPanel) extraPanel).AdminClearanceTF.getText());
+                        ((Customer) newUser).setPhoneNumber(((CustomerRegisterPanel) extraPanel).CustPhoneTF.getText());
                         newUser.setUserType(User.UserType.CUSTOMER);
                         break;
                     }

@@ -8,7 +8,7 @@ public class MainApplication {
     
     public MainFrame mainFrame;
     public static Repository repository;
-    public User loggedInUser;
+    public static User loggedInUser;
     
     public MainApplication()
     {

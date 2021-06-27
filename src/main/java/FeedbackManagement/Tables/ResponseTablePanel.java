@@ -5,10 +5,12 @@
  */
 package FeedbackManagement.Tables;
 
+import FeedbackManagement.MainApplication;
 import FeedbackManagement.Models.Feedback;
 import FeedbackManagement.Models.Response;
 import FeedbackManagement.Table.Models.FeedbackTableModel;
 import FeedbackManagement.Table.Models.ResponseTableModel;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,17 +28,21 @@ import javax.swing.table.TableModel;
  */
 public class ResponseTablePanel extends javax.swing.JPanel{
     
-    private Object bean;
+    List<Response> responseList;
    
     /**
      * Creates new customizer ResponseTablePanel
      */
     public ResponseTablePanel() {
         initComponents();
-        List<Response> myList = null; // list here
-        TableModel tableModel = new ResponseTableModel(myList);
-        jTable1 = new JTable(tableModel);
-        jScrollPane1.setViewportView(jTable1);
+        try {
+            responseList = MainApplication.repository.getResponses(null);
+            TableModel tableModel = new ResponseTableModel(responseList);
+            jTable1 = new JTable(tableModel);
+            jScrollPane1.setViewportView(jTable1);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResponseTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
      public Date convertToDate(String s) throws ParseException{
@@ -200,7 +206,14 @@ public class ResponseTablePanel extends javax.swing.JPanel{
                         break;
                 }
             }
-            //Send the filter somewhere 
+            try {
+                responseList = MainApplication.repository.getResponses(Filter);
+                TableModel tableModel = new ResponseTableModel(responseList);
+                jTable1 = new JTable(tableModel);
+                jScrollPane1.setViewportView(jTable1);
+            } catch (SQLException ex) {
+                Logger.getLogger(ResponseTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
        
     }//GEN-LAST:event_filterButtonActionPerformed
 

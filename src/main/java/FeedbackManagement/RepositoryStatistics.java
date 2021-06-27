@@ -98,7 +98,7 @@ public class RepositoryStatistics {
         {
             String[] row = new String[2];
             row[0] = resultSet.getString("departmentname");
-            row[1] = String.valueOf(resultSet.getDouble("COUNT_RP"));
+            row[1] = String.valueOf(resultSet.getDouble("AVG_FD"));
             result.add(row);
         }
         

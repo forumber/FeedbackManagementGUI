@@ -5,7 +5,11 @@
  */
 package FeedbackManagement.GUI;
 
+import FeedbackManagement.MainApplication;
 import FeedbackManagement.Models.Feedback;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -95,6 +99,19 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(mainFrame, "You need to enter your feedback first!!");
         else{
             Feedback feedback = new Feedback();
+            feedback.setCustomerID(MainApplication.loggedInUser.getUserID());
+            feedback.setMessage(feedbackTF.getText());
+            feedback.setCategoryID(1); // FIX ME
+            feedback.setDepCode(3); // FIX ME
+            
+            try {
+                MainApplication.repository.postNewFeedback(feedback);
+                JOptionPane.showMessageDialog(this, "Success!");
+                dispose();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(NewFeedbackFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_SendBActionPerformed
 
