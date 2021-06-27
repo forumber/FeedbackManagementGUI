@@ -5,7 +5,12 @@
  */
 package FeedbackManagement.GUI;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -50,6 +55,12 @@ public class StatisticsPanel extends javax.swing.JPanel{
         
         jScrollPane3.setViewportView(CustomerNotRespondedTable);
         jScrollPane4.setViewportView(DailyFeedbackTable);
+    }
+    
+    public Date convertToDate(String s) throws ParseException{
+        SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
+        Date date=formatter1.parse(s);
+        return date;
     }
 
     /**
@@ -222,6 +233,16 @@ public class StatisticsPanel extends javax.swing.JPanel{
         if(startDateTF.getText().isEmpty() || endDateTF.getText().isEmpty())
             JOptionPane.showMessageDialog(null,"You need to fill all the fields to register!!");
         else{
+            try {
+                Date startDate = convertToDate(startDateTF.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                Date endDate = convertToDate(endDateTF.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
             List<String[]> bestemp = null; // get
             String data1[][] = null;
             for(int i = 0 ; i < bestemp.size() ; i++){

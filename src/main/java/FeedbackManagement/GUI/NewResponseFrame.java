@@ -38,8 +38,6 @@ public class NewResponseFrame extends javax.swing.JPanel  {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         customerID = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        feedbackID = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         employeeID = new javax.swing.JLabel();
         responseTF = new javax.swing.JTextField();
@@ -51,11 +49,7 @@ public class NewResponseFrame extends javax.swing.JPanel  {
 
         customerID.setText("jLabel2");
 
-        jLabel3.setText("Response ID:");
-
-        feedbackID.setText("jLabel4");
-
-        jLabel2.setText("Employee ID:");
+        jLabel2.setText("Feedback ID:");
 
         employeeID.setText("jLabel4");
 
@@ -89,15 +83,13 @@ public class NewResponseFrame extends javax.swing.JPanel  {
                         .addComponent(SendB))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addGap(39, 39, 39)
+                        .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(customerID, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(employeeID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(feedbackID, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(employeeID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 47, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -115,11 +107,7 @@ public class NewResponseFrame extends javax.swing.JPanel  {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(employeeID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(feedbackID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(statusCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,10 +157,8 @@ public class NewResponseFrame extends javax.swing.JPanel  {
     private javax.swing.JButton SendB;
     private javax.swing.JLabel customerID;
     private javax.swing.JLabel employeeID;
-    private javax.swing.JLabel feedbackID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField responseTF;
