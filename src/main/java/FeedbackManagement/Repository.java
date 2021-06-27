@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,7 +29,7 @@ public class Repository {
     private final String insertToEmployeesQuery = "INSERT INTO EMPLOYEES (depcode, startdate, userid) VALUES (?, ?, ?)";
     private final String insertToCustomersQuery = "INSERT INTO CUSTOMERS (phonenumber, registrationdate, userid) VALUES (?, ?, ?)";
     private final String getNextUserIdQuery = "SELECT SEQ_USERS.nextval FROM DUAL";
-    private final String getUserQuery = "SELECT USERID, USERTYPE, USR_NAME, DATEOFBIRTH FROM USERS WHERE email = ? AND usr_password = ?";
+    private final String getUserQuery = "SELECT USERID, USERTYPE, USR_NAME, DATEOFBIRTH FROM USERS";
     private final String getAdminQuery = "SELECT clearancelevel FROM ADMINS WHERE userid = ?";
     private final String getEmployeeQuery = "SELECT depcode, startdate FROM EMPLOYEES WHERE userid = ?";
     private final String getCustomerQuery = "SELECT phonenumber, registrationdate FROM CUSTOMERS WHERE userid = ?";
@@ -109,55 +110,15 @@ public class Repository {
     
     public User login(String email, String password) throws SQLException
     {
-        PreparedStatement statement = connection.prepareStatement(getUserQuery);
-        statement.setString(1, email);
-        statement.setString(2, generateMD5(password));
+        Map<String, Object> newFilter = new HashMap();
+        newFilter.put("email", email);
+        newFilter.put("usr_password", generateMD5(password));
         
-        ResultSet result = statement.executeQuery();
-        
-        if (!result.next())
+        List<User> userList = getUsers(newFilter);
+        if (userList.isEmpty())
             return null;
-        
-        User loggedInUser = null;
-        PreparedStatement statement2 = null;
-        
-        int userType = result.getInt("usertype");
-        int userId = result.getInt("userid");
-        
-        switch(userType)
-        {
-            case 1:
-                statement2 = connection.prepareStatement(getCustomerQuery);
-                statement2.setInt(1, userId);
-                ResultSet CustomerResults = statement2.executeQuery();
-                CustomerResults.next();
-                loggedInUser = new Customer(CustomerResults.getString("phonenumber"), CustomerResults.getDate("registrationdate"));
-                loggedInUser.setUserType(User.UserType.CUSTOMER);
-                break;
-            case 2:
-                statement2 = connection.prepareStatement(getEmployeeQuery);
-                statement2.setInt(1, userId);
-                ResultSet EmployeeResults = statement2.executeQuery();
-                EmployeeResults.next();
-                loggedInUser = new Employee(EmployeeResults.getDate("startdate"), EmployeeResults.getInt("depcode"));
-                loggedInUser.setUserType(User.UserType.EMPLOYEE);
-                break;
-            case 3:
-                statement2 = connection.prepareStatement(getAdminQuery);
-                statement2.setInt(1, userId);
-                ResultSet AdminResults = statement2.executeQuery();
-                AdminResults.next();
-                loggedInUser = new Admin(AdminResults.getInt("clearancelevel"));
-                loggedInUser.setUserType(User.UserType.ADMIN);
-                break;
-        }
-        
-        loggedInUser.setDateOfBirth(result.getDate("dateofbirth"));
-        loggedInUser.setEmail(email);
-        loggedInUser.setUserID(userId);
-        loggedInUser.setUserName(result.getString("usr_name"));
-        
-        return loggedInUser;
+        else
+            return userList.get(0);
     }
     
     private static String generateMD5(String stringToGenerate)
@@ -247,5 +208,57 @@ public class Repository {
         }
         
         return feedbacks;
+    }
+    
+    public List<User> getUsers(Map<String, Object> filters) throws SQLException
+    {
+        ResultSet result = buildAndRunQuery(filters, getUserQuery);
+        
+        List<User> users = new ArrayList();
+        
+        while (result.next())
+        {
+            User newUser = null;
+            PreparedStatement statement2 = null;
+
+            int userType = result.getInt("usertype");
+            int userId = result.getInt("userid");
+
+            switch(userType)
+            {
+                case 1:
+                    statement2 = connection.prepareStatement(getCustomerQuery);
+                    statement2.setInt(1, userId);
+                    ResultSet CustomerResults = statement2.executeQuery();
+                    CustomerResults.next();
+                    newUser = new Customer(CustomerResults.getString("phonenumber"), CustomerResults.getDate("registrationdate"));
+                    newUser.setUserType(User.UserType.CUSTOMER);
+                    break;
+                case 2:
+                    statement2 = connection.prepareStatement(getEmployeeQuery);
+                    statement2.setInt(1, userId);
+                    ResultSet EmployeeResults = statement2.executeQuery();
+                    EmployeeResults.next();
+                    newUser = new Employee(EmployeeResults.getDate("startdate"), EmployeeResults.getInt("depcode"));
+                    newUser.setUserType(User.UserType.EMPLOYEE);
+                    break;
+                case 3:
+                    statement2 = connection.prepareStatement(getAdminQuery);
+                    statement2.setInt(1, userId);
+                    ResultSet AdminResults = statement2.executeQuery();
+                    AdminResults.next();
+                    newUser = new Admin(AdminResults.getInt("clearancelevel"));
+                    newUser.setUserType(User.UserType.ADMIN);
+                    break;
+            }
+
+            newUser.setDateOfBirth(result.getDate("dateofbirth"));
+            newUser.setEmail(result.getString("email"));
+            newUser.setUserID(userId);
+            newUser.setUserName(result.getString("usr_name"));
+            users.add(newUser);
+        }
+        
+        return users;
     }
 }
