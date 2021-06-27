@@ -24,7 +24,7 @@ public class RepositoryStatistics {
         connection = newConnection;
     }
     
-    public List<String[]> getEmployeeWhoGaveTheMostResponseForEachDepartmentWithinTheSpecifiedDays(java.util.Date after, java.util.Date before) throws SQLException
+    public ResultSet getEmployeeWhoGaveTheMostResponseForEachDepartmentWithinTheSpecifiedDays(java.util.Date after, java.util.Date before) throws SQLException
     {
         String query = String.join(System.lineSeparator(), 
                 "SELECT dp.departmentname, us.usr_name, COUNT(rp.responseid) AS COUNT_RP",
@@ -62,23 +62,12 @@ public class RepositoryStatistics {
         statement.setDate(2, new java.sql.Date(before.getTime()));
         statement.setDate(3, new java.sql.Date(after.getTime()));
         statement.setDate(4, new java.sql.Date(before.getTime()));
-        ResultSet resultSet = statement.executeQuery();
+        return statement.executeQuery();
         
-        List<String[]> result = new ArrayList();
-        
-        while(resultSet.next())
-        {
-            String[] row = new String[3];
-            row[0] = resultSet.getString("departmentname");
-            row[1] = resultSet.getString("usr_name");
-            row[2] = String.valueOf(resultSet.getInt("COUNT_RP"));
-            result.add(row);
-        }
-        
-        return result;
+
     }
     
-    public List<String[]> getAverageNumberOfDailyFeedbackReceivedForEachDepartmentInTheLastMonth() throws SQLException
+    public ResultSet getAverageNumberOfDailyFeedbackReceivedForEachDepartmentInTheLastMonth() throws SQLException
     {
         String query = String.join(System.lineSeparator(), 
                 "SELECT dp.departmentname, AVG(fd.feedbackid) AS AVG_FD",
@@ -90,19 +79,8 @@ public class RepositoryStatistics {
                 "");
         
         PreparedStatement statement =  connection.prepareStatement(query);
-        ResultSet resultSet = statement.executeQuery();
-        
-        List<String[]> result = new ArrayList();
-        
-        while(resultSet.next())
-        {
-            String[] row = new String[2];
-            row[0] = resultSet.getString("departmentname");
-            row[1] = String.valueOf(resultSet.getDouble("AVG_FD"));
-            result.add(row);
-        }
-        
-        return result;
+        return statement.executeQuery();
+
     }
     
     public Double getResponseRateToTotalFeedbacks() throws SQLException
@@ -120,7 +98,7 @@ public class RepositoryStatistics {
         return resultSet.getDouble(1);
     }
     
-    public List<String[]> getNumberOfCustomersThatHaveNotYetBeenReponded() throws SQLException
+    public ResultSet getNumberOfCustomersThatHaveNotYetBeenReponded() throws SQLException
     {
         String query = String.join(System.lineSeparator(), 
                 "SELECT us.userid, us.usr_name",
@@ -143,18 +121,7 @@ public class RepositoryStatistics {
                 "");
         
         PreparedStatement statement =  connection.prepareStatement(query);
-        ResultSet resultSet = statement.executeQuery();
+        return statement.executeQuery();
         
-        List<String[]> result = new ArrayList();
-        
-        while(resultSet.next())
-        {
-            String[] row = new String[2];
-            row[0] = String.valueOf(resultSet.getInt("userid"));
-            row[1] = resultSet.getString("usr_name");
-            result.add(row);
-        }
-        
-        return result;
     }
 }

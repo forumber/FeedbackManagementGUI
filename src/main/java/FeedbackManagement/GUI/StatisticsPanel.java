@@ -6,15 +6,19 @@
 package FeedbackManagement.GUI;
 
 import FeedbackManagement.MainApplication;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,32 +41,12 @@ public class StatisticsPanel extends javax.swing.JPanel{
    
     
     public void initTables() throws SQLException{
-        
-        List<String[]> customer = MainApplication.repository.getRepoStatistics().getNumberOfCustomersThatHaveNotYetBeenReponded();
-        List<String[]> avgfeed = MainApplication.repository.getRepoStatistics().getAverageNumberOfDailyFeedbackReceivedForEachDepartmentInTheLastMonth();
+        CustomerNotRespondedTable = new JTable(buildTableModel(MainApplication.repository.getRepoStatistics().getNumberOfCustomersThatHaveNotYetBeenReponded())); 
+        DailyFeedbackTable  = new JTable(buildTableModel(MainApplication.repository.getRepoStatistics().getAverageNumberOfDailyFeedbackReceivedForEachDepartmentInTheLastMonth()));
         ResponseRateLabel.setText(MainApplication.repository.getRepoStatistics().getResponseRateToTotalFeedbacks().toString());
         
-        String data2[][] = null;
-        String data3[][] = null;
-        
-        for(int i = 0 ; i < customer.size() ; i++){
-            //data2[i][0] = List.get(i).[0];
-            //data2[i][1] = List.get(i).[1];
-        }
-        
-        for(int i = 0 ; i < avgfeed.size() ; i++){
-            //data1[i][0] = List.get(i).[0];
-            //data1[i][1] = List.get(i).[1];
-        }
-        
-        String column2[]={"User ID","User Name"};  
-        String column3[]={"Department","Average Feedbacks"};  
-        
-        CustomerNotRespondedTable = new JTable(data2,column2); 
-        DailyFeedbackTable  = new JTable(data3,column3);     
-        
-//        jScrollPane3.setViewportView(CustomerNotRespondedTable);
-//        jScrollPane4.setViewportView(DailyFeedbackTable);
+        jScrollPane3.setViewportView(CustomerNotRespondedTable);
+        jScrollPane4.setViewportView(DailyFeedbackTable);
     }
     
     public Date convertToDate(String s){
@@ -74,6 +58,32 @@ public class StatisticsPanel extends javax.swing.JPanel{
             Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+    
+        public static DefaultTableModel buildTableModel(ResultSet rs)
+        throws SQLException {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+
+        // names of columns
+        Vector<String> columnNames = new Vector<String>();
+        int columnCount = metaData.getColumnCount();
+        for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }
+
+        // data of the table
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+        while (rs.next()) {
+            Vector<Object> vector = new Vector<Object>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                vector.add(rs.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        return new DefaultTableModel(data, columnNames);
+
     }
 
     /**
@@ -250,15 +260,8 @@ public class StatisticsPanel extends javax.swing.JPanel{
                 Date startDate = convertToDate(startDateTF.getText());
                 Date endDate = convertToDate(endDateTF.getText());
                 
-                List<String[]> bestemp = MainApplication.repository.getRepoStatistics().getEmployeeWhoGaveTheMostResponseForEachDepartmentWithinTheSpecifiedDays(startDate, endDate); // get
-                String data1[][] = null;
-                for(int i = 0 ; i < bestemp.size() ; i++){
-                    //data1[i][0] = List.get(i).[0];
-                    //data1[i][1] = List.get(i).[1];
-                    //data1[i][2] = List.get(i).[2];
-                }
-                String column1[]={"Department","Employee","#Responses"};
-                BestEmployeeTable = new JTable(data1,column1);
+                
+                BestEmployeeTable = new JTable(buildTableModel(MainApplication.repository.getRepoStatistics().getEmployeeWhoGaveTheMostResponseForEachDepartmentWithinTheSpecifiedDays(startDate, endDate))); 
                 jScrollPane2.setViewportView(BestEmployeeTable);
             } catch (SQLException ex) {
                 Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
