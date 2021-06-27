@@ -25,8 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void start()
     {
-        //changePanel("LoginRegisterSelection");
-        changePanel("Admin");
+        changePanel("LoginRegisterSelection");
     }
 
         /**
