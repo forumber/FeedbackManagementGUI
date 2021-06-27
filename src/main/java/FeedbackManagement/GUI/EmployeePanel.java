@@ -5,6 +5,9 @@
  */
 package FeedbackManagement.GUI;
 
+import FeedbackManagementTables.FeedbackTablePanel;
+import FeedbackManagementTables.ResponseTablePanel;
+
 /**
  *
  * @author Serhat Korkmaz
@@ -12,6 +15,7 @@ package FeedbackManagement.GUI;
 public class EmployeePanel extends javax.swing.JPanel implements java.beans.Customizer {
     private final MainFrame mainFrame;
     private Object bean;
+    private javax.swing.JPanel tablePanel;
 
     /**
      * Creates new customizer EmployeePanel
@@ -24,7 +28,23 @@ public class EmployeePanel extends javax.swing.JPanel implements java.beans.Cust
     public void setObject(Object bean) {
         this.bean = bean;
     }
-
+    
+     public void ChangePanel(String s){
+        TablePanel.removeAll();
+        switch (s) {
+            case "Feedback":
+                tablePanel = new FeedbackTablePanel();
+                break;
+            case "Response":
+                tablePanel = new ResponseTablePanel();
+                break;
+            default:
+                break;
+        }
+        TablePanel.add(tablePanel);
+        TablePanel.validate();
+        TablePanel.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,10 +59,25 @@ public class EmployeePanel extends javax.swing.JPanel implements java.beans.Cust
         newResponseButton = new javax.swing.JButton();
 
         FeedbacksButton.setText("Feedbacks");
+        FeedbacksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeedbacksButtonActionPerformed(evt);
+            }
+        });
 
         myResponsesButton.setText("My Responses");
+        myResponsesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myResponsesButtonActionPerformed(evt);
+            }
+        });
 
         newResponseButton.setText("New Response");
+        newResponseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newResponseButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,6 +109,18 @@ public class EmployeePanel extends javax.swing.JPanel implements java.beans.Cust
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void FeedbacksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbacksButtonActionPerformed
+        ChangePanel("Feedback");
+    }//GEN-LAST:event_FeedbacksButtonActionPerformed
+
+    private void myResponsesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myResponsesButtonActionPerformed
+        ChangePanel("Response");
+    }//GEN-LAST:event_myResponsesButtonActionPerformed
+
+    private void newResponseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newResponseButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newResponseButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

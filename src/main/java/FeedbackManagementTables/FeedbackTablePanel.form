@@ -179,43 +179,29 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="feedbackIDTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="feedbackEmpIDTF">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="feedbackCusIDTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="feedbackDepTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField5"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="feedbackCatIDTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField6"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="feedbackDateTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField7"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="feedbackStatusCB">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="SENT"/>
-            <StringItem index="1" value="RESPONDED"/>
-            <StringItem index="2" value="DONE_FAIL"/>
-            <StringItem index="3" value="DONE_SUCCESS"/>
+          <StringArray count="5">
+            <StringItem index="0" value="ALL"/>
+            <StringItem index="1" value="SENT"/>
+            <StringItem index="2" value="RESPONDED"/>
+            <StringItem index="3" value="DONE_FAIL"/>
+            <StringItem index="4" value="DONE_SUCCESS"/>
           </StringArray>
         </Property>
       </Properties>
@@ -227,6 +213,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filter"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

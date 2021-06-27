@@ -5,6 +5,14 @@
  */
 package FeedbackManagementTables;
 
+import FeedbackManagement.Models.Feedback;
+import TableModels.FeedbackTableModel;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Serhat Korkmaz
@@ -12,12 +20,15 @@ package FeedbackManagementTables;
 public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
     
     private Object bean;
-
+    HashMap<String, String> Filter = new HashMap<String, String>();
     /**
      * Creates new customizer FeedbackTablePanel
      */
     public FeedbackTablePanel() {
         initComponents();
+        List<Feedback> myList = null; // list here
+        TableModel tableModel = new FeedbackTableModel(myList);
+        jTable1 = new JTable(tableModel);
     }
     
     public void setObject(Object bean) {
@@ -77,21 +88,16 @@ public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans
 
         jLabel7.setText("Feedback Date:");
 
-        feedbackIDTF.setText("jTextField1");
+        feedbackEmpIDTF.setToolTipText("");
 
-        feedbackEmpIDTF.setText("jTextField3");
-
-        feedbackCusIDTF.setText("jTextField4");
-
-        feedbackDepTF.setText("jTextField5");
-
-        feedbackCatIDTF.setText("jTextField6");
-
-        feedbackDateTF.setText("jTextField7");
-
-        feedbackStatusCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SENT", "RESPONDED", "DONE_FAIL", "DONE_SUCCESS" }));
+        feedbackStatusCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "SENT", "RESPONDED", "DONE_FAIL", "DONE_SUCCESS" }));
 
         filterButton.setText("Filter");
+        filterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -176,6 +182,51 @@ public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
+        Filter = new HashMap<String, String>();
+        if(feedbackCatIDTF.getText().isEmpty() && feedbackCusIDTF.getText().isEmpty() && feedbackDateTF.getText().isEmpty() && feedbackDepTF.getText().isEmpty() && feedbackEmpIDTF.getText().isEmpty() && feedbackIDTF.getText().isEmpty() && feedbackStatusCB.getSelectedItem().toString() == "ALL") 
+            JOptionPane.showMessageDialog(null, "You need to fill a field to filter!!");
+        else{
+            if(!feedbackCatIDTF.getText().isEmpty()){
+                Filter.put("CATID = ", feedbackCatIDTF.getText());
+            }
+            if(!feedbackCusIDTF.getText().isEmpty()){
+                Filter.put("CUSTOMERID = ", feedbackCusIDTF.getText());
+            }
+            if(!feedbackDateTF.getText().isEmpty()){
+                Filter.put("FD_DATE = ", feedbackDateTF.getText());
+            }
+            if(!feedbackDepTF.getText().isEmpty()){
+                Filter.put("DEP_CODE = ", feedbackDepTF.getText());
+            }
+            if(!feedbackEmpIDTF.getText().isEmpty()){
+                Filter.put("EMPID = ", feedbackEmpIDTF.getText());
+            }
+            if(!feedbackIDTF.getText().isEmpty()){
+                Filter.put("FEEDBACKID = ", feedbackIDTF.getText());
+            }
+            if(feedbackStatusCB.getSelectedItem().toString() != "ALL"){
+                switch (feedbackStatusCB.getSelectedItem().toString()) {
+                    case "DONE_SUCCESS":
+                        Filter.put("STATUS = ", "DONE_SUCCESS");
+                        break;
+                    case "DONE_FAIL":
+                        Filter.put("STATUS = ", "DONE_FAIL");
+                        break;
+                    case "RESPONDED":
+                        Filter.put("STATUS = ", "RESPONDED");
+                        break;
+                    case "SENT":
+                        Filter.put("STATUS = ", "SENT");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //Send the filter somewhere 
+        }
+    }//GEN-LAST:event_filterButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

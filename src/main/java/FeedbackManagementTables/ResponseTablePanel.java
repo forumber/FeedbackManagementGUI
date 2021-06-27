@@ -5,6 +5,16 @@
  */
 package FeedbackManagementTables;
 
+import FeedbackManagement.Models.Feedback;
+import FeedbackManagement.Models.Response;
+import TableModels.FeedbackTableModel;
+import TableModels.ResponseTableModel;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Serhat Korkmaz
@@ -12,12 +22,17 @@ package FeedbackManagementTables;
 public class ResponseTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
     
     private Object bean;
+    HashMap<String, String> Filter = new HashMap<String, String>();
 
     /**
      * Creates new customizer ResponseTablePanel
      */
     public ResponseTablePanel() {
         initComponents();
+        List<Response> myList = null; // list here
+        TableModel tableModel = new ResponseTableModel(myList);
+        jTable1 = new JTable(tableModel);
+        jScrollPane1.setViewportView(jTable1);
     }
     
     public void setObject(Object bean) {
@@ -43,7 +58,7 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         employeeID = new javax.swing.JTextField();
-        customerID = new javax.swing.JTextField();
+        FeedbackIDTF = new javax.swing.JTextField();
         filterButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -61,11 +76,8 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
 
         jLabel1.setText("Response ID:");
 
-        responseIDTF.setText("jTextField1");
-
         jLabel2.setText("Response Date:");
 
-        responseDateTF.setText("dd/mm/yyyy");
         responseDateTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 responseDateTFActionPerformed(evt);
@@ -78,13 +90,14 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
 
         jLabel4.setText("Employee ID:");
 
-        jLabel5.setText("Customer ID:");
-
-        employeeID.setText("jTextField1");
-
-        customerID.setText("jTextField1");
+        jLabel5.setText("Feedback ID:");
 
         filterButton.setText("Filter");
+        filterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,7 +114,7 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(responseIDTF)
-                    .addComponent(customerID)
+                    .addComponent(FeedbackIDTF)
                     .addComponent(filterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(feedbackStatusCB, javax.swing.GroupLayout.Alignment.TRAILING, 0, 101, Short.MAX_VALUE)
                     .addComponent(responseDateTF, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -134,7 +147,7 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(customerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(FeedbackIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addComponent(filterButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -146,9 +159,45 @@ public class ResponseTablePanel extends javax.swing.JPanel implements java.beans
         // TODO add your handling code here:
     }//GEN-LAST:event_responseDateTFActionPerformed
 
+    private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
+        Filter = new HashMap<String, String>();
+        if(FeedbackIDTF.getText().isEmpty() && employeeID.getText().isEmpty() && responseDateTF.getText().isEmpty() && responseIDTF.getText().isEmpty() && feedbackStatusCB.getSelectedItem().toString() == "All") 
+            JOptionPane.showMessageDialog(null, "You need to fill a field to filter!!");
+        else{
+            if(!FeedbackIDTF.getText().isEmpty()){
+                Filter.put("FEEDID = ", FeedbackIDTF.getText());
+            }
+            if(!employeeID.getText().isEmpty()){
+                Filter.put("EMPID = ", employeeID.getText());
+            }
+            if(!responseDateTF.getText().isEmpty()){
+                Filter.put("RESPONSE_DATE = ", responseDateTF.getText());
+            }
+            if(!responseIDTF.getText().isEmpty()){
+                Filter.put("RESPONSEID = ", responseIDTF.getText());
+            }
+            if(feedbackStatusCB.getSelectedItem().toString() != "All"){
+                switch (feedbackStatusCB.getSelectedItem().toString()) {
+                    case "Done Success":
+                        Filter.put("STATUS = ", "DONE_SUCCESS");
+                        break;
+                    case "Done Fail":
+                        Filter.put("STATUS = ", "DONE_FAIL");
+                        break;
+                    case "Responded":
+                        Filter.put("STATUS = ", "RESPONDED");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //Send the filter somewhere 
+        }
+    }//GEN-LAST:event_filterButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField customerID;
+    private javax.swing.JTextField FeedbackIDTF;
     private javax.swing.JTextField employeeID;
     private javax.swing.JComboBox<String> feedbackStatusCB;
     private javax.swing.JButton filterButton;

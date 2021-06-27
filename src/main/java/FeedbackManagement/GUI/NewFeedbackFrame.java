@@ -12,14 +12,14 @@ import javax.swing.JOptionPane;
  *
  * @author Serhat Korkmaz
  */
-public class FeedbackPanel extends javax.swing.JPanel implements java.beans.Customizer {
+public class NewFeedbackFrame extends javax.swing.JFrame implements java.beans.Customizer {
     
     private Object bean;
     private final MainFrame mainFrame;
     /**
      * Creates new customizer FeedbackPanel
      */
-    public FeedbackPanel(MainFrame mainFrame) {
+    public NewFeedbackFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
     }

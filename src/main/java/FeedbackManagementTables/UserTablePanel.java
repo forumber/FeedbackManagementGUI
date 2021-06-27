@@ -5,6 +5,18 @@
  */
 package FeedbackManagementTables;
 
+import FeedbackManagement.GUI.MainFrame;
+import FeedbackManagement.Models.Feedback;
+import FeedbackManagement.Models.User;
+import TableModels.FeedbackTableModel;
+import TableModels.UserTableModel;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Serhat Korkmaz
@@ -12,12 +24,16 @@ package FeedbackManagementTables;
 public class UserTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
     
     private Object bean;
-
+    HashMap<String, String> Filter = new HashMap<String, String>();
     /**
      * Creates new customizer UserTablePanel
      */
     public UserTablePanel() {
         initComponents();
+        List<User> myList = new ArrayList(); // list here
+        TableModel tableModel = new UserTableModel(myList);
+        jTable1 = new JTable(tableModel);
+        jScrollPane1.setViewportView(jTable1);
     }
     
     public void setObject(Object bean) {
@@ -59,7 +75,6 @@ public class UserTablePanel extends javax.swing.JPanel implements java.beans.Cus
 
         jLabel1.setText("User ID:");
 
-        UserIDTF.setText("jTextField1");
         UserIDTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UserIDTFActionPerformed(evt);
@@ -72,13 +87,20 @@ public class UserTablePanel extends javax.swing.JPanel implements java.beans.Cus
 
         jLabel3.setText("User Name:");
 
-        UserNameTF.setText("jTextField2");
-
-        UserDoBTF.setText("jTextField3");
+        UserNameTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserNameTFActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Date of Birth:");
 
         FilterButton.setText("Filter");
+        FilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FilterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -102,7 +124,7 @@ public class UserTablePanel extends javax.swing.JPanel implements java.beans.Cus
                                 .addComponent(jLabel4))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(UserDoBTF)
+                                .addComponent(UserDoBTF, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                                 .addComponent(UserNameTF))))
                     .addComponent(FilterButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -140,6 +162,43 @@ public class UserTablePanel extends javax.swing.JPanel implements java.beans.Cus
     private void UserIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserIDTFActionPerformed
+
+    private void UserNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserNameTFActionPerformed
+
+    private void FilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterButtonActionPerformed
+        Filter = new HashMap<String, String>();
+        if(UserDoBTF.getText().isEmpty() && UserIDTF.getText().isEmpty() && UserNameTF.getText().isEmpty() && UserTypeCB.getSelectedItem().toString() == "All") 
+            JOptionPane.showMessageDialog(null, "You need to fill a field to filter!!");
+        else{
+            if(!UserIDTF.getText().isEmpty()){
+                Filter.put("USERID = ", UserIDTF.getText());
+            }
+            if(!UserDoBTF.getText().isEmpty()){
+                Filter.put("DATEOFBIRTH = ", UserDoBTF.getText());
+            }
+            if(!UserNameTF.getText().isEmpty()){
+                Filter.put("USR_NAME = ", UserNameTF.getText());
+            }
+            if(UserTypeCB.getSelectedItem().toString() != "All"){
+                switch (UserTypeCB.getSelectedItem().toString()) {
+                    case "Admin":
+                        Filter.put("USERTYPE = ", "3");
+                        break;
+                    case "Employee":
+                        Filter.put("USERTYPE = ", "2");
+                        break;
+                    case "Customer":
+                        Filter.put("USERTYPE = ", "1");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //Send the filter somewhere 
+        }
+    }//GEN-LAST:event_FilterButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

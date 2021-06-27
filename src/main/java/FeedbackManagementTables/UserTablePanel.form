@@ -38,7 +38,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="UserDoBTF" max="32767" attributes="0"/>
+                              <Component id="UserDoBTF" pref="65" max="32767" attributes="0"/>
                               <Component id="UserNameTF" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -114,9 +114,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="UserIDTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UserIDTFActionPerformed"/>
       </Events>
@@ -147,14 +144,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="UserNameTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UserNameTFActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="UserDoBTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -165,6 +159,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filter"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FilterButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
