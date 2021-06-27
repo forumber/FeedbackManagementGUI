@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.xml.bind.DatatypeConverter;
+//import javax.xml.bind.DatatypeConverter;
 
 public class Repository {
     private Connection connection;
@@ -161,7 +161,7 @@ public class Repository {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException ex) { }
         md.update(stringToGenerate.getBytes());
-        return DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
+        return "DatatypeConverter.printHexBinary(md.digest()).toLowerCase()";
     }
             
 }

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Burak Korkmaz
+ * @author Serhat Korkmaz
  */
 public class ResponsePanel extends javax.swing.JPanel implements java.beans.Customizer {
     

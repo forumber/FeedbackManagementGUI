@@ -102,10 +102,13 @@ public class LoginPanel extends javax.swing.JPanel{
             switch(mainFrame.application.loggedInUser.getUserType())
             {
                 case ADMIN:
+                    mainFrame.changePanel("Admin");
                     break;
                 case CUSTOMER:
+                    mainFrame.changePanel("Customer");
                     break;
                 case EMPLOYEE:
+                    mainFrame.changePanel("Employee");
                     break;
             }
             

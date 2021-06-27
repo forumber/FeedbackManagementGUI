@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FeedbackManagement.GUI;
+package FeedbackManagementTables;
 
 /**
  *
- * @author Burak Korkmaz
+ * @author Serhat Korkmaz
  */
 public class ResponseTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
     

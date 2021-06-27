@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- * @author Burak Korkmaz
+ * @author Serhat Korkmaz
  */
 @Data
 @AllArgsConstructor
