@@ -191,7 +191,7 @@ public class Repository {
     
     public List<Feedback> getFeedbacks(Map<String, Object> filters) throws SQLException
     {
-        ResultSet result = buildAndRunQuery(filters, getResponseQuery);
+        ResultSet result = buildAndRunQuery(filters, getFeedbackQuery);
         
         List<Feedback> feedbacks = new ArrayList();
         
