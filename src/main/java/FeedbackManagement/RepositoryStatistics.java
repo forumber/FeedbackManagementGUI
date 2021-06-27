@@ -54,7 +54,7 @@ public class RepositoryStatistics {
                 "                                              rp.response_date <",
                 "                                              ?",
                 "                                        GROUP BY dp.departmentname,",
-                "                                                 us.usr_name) tt1)",
+                "                                                 us.usr_name) tt1))",
                 "");
         
         PreparedStatement statement =  connection.prepareStatement(query);

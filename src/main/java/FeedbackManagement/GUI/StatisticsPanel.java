@@ -60,7 +60,7 @@ public class StatisticsPanel extends javax.swing.JPanel{
         }
     }
     
-        public static DefaultTableModel buildTableModel(ResultSet rs)
+    public static DefaultTableModel buildTableModel(ResultSet rs)
         throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
@@ -83,7 +83,6 @@ public class StatisticsPanel extends javax.swing.JPanel{
         }
 
         return new DefaultTableModel(data, columnNames);
-
     }
 
     /**
