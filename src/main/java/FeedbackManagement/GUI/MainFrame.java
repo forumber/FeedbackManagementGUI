@@ -25,7 +25,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void start()
     {
-        changePanel("LoginRegisterSelection");
+        //changePanel("LoginRegisterSelection");
+        changePanel("Admin");
     }
 
         /**
@@ -59,6 +60,30 @@ public class MainFrame extends javax.swing.JFrame {
             pack();
             repaint();
             setSize(300, 150);
+        } 
+        else if (panelName.equalsIgnoreCase("Admin"))
+        {
+            getContentPane().removeAll();
+            getContentPane().add(new AdminPanel(this));
+            pack();
+            repaint();
+            setSize(804, 400);
+        } 
+        else if (panelName.equalsIgnoreCase("Customer"))
+        {
+            getContentPane().removeAll();
+            getContentPane().add(new CustomerPanel(this));
+            pack();
+            repaint();
+            setSize(804, 400);
+        } 
+        else if (panelName.equalsIgnoreCase("Employee"))
+        {
+            getContentPane().removeAll();
+            getContentPane().add(new EmployeePanel(this));
+            pack();
+            repaint();
+            setSize(804, 400);
         } 
         setLocationRelativeTo(null);
         setVisible(true);
