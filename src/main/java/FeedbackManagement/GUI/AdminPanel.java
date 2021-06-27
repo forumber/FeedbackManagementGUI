@@ -5,9 +5,9 @@
  */
 package FeedbackManagement.GUI;
 
-import FeedbackManagementTables.FeedbackTablePanel;
-import FeedbackManagementTables.ResponseTablePanel;
-import FeedbackManagementTables.UserTablePanel;
+import FeedbackManagement.Tables.FeedbackTablePanel;
+import FeedbackManagement.Tables.ResponseTablePanel;
+import FeedbackManagement.Tables.UserTablePanel;
     
 /**
  *
@@ -42,6 +42,9 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
             case "Response":
                 tablePanel = new ResponseTablePanel();
                 break;
+            case "Statistics":
+                tablePanel = new StatisticsPanel();
+                break;
             default:
                 break;
         }
@@ -63,6 +66,8 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
         FeedbacksButton = new javax.swing.JButton();
         ResponsesButton = new javax.swing.JButton();
         StatisticsButton = new javax.swing.JButton();
+        deleteOldButton = new javax.swing.JButton();
+        updateOldButton = new javax.swing.JButton();
 
         UserButton.setText("Users");
         UserButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +97,20 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
             }
         });
 
+        deleteOldButton.setText("Delete Old Records");
+        deleteOldButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteOldButtonActionPerformed(evt);
+            }
+        });
+
+        updateOldButton.setText("Update Old Records");
+        updateOldButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateOldButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,7 +127,11 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
                         .addComponent(ResponsesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(StatisticsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 317, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteOldButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateOldButton)
+                        .addGap(0, 35, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -119,7 +142,9 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
                     .addComponent(UserButton)
                     .addComponent(FeedbacksButton)
                     .addComponent(ResponsesButton)
-                    .addComponent(StatisticsButton))
+                    .addComponent(StatisticsButton)
+                    .addComponent(deleteOldButton)
+                    .addComponent(updateOldButton))
                 .addGap(11, 11, 11)
                 .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
                 .addContainerGap())
@@ -139,8 +164,16 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
     }//GEN-LAST:event_ResponsesButtonActionPerformed
 
     private void StatisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatisticsButtonActionPerformed
-        // TODO add your handling code here:
+       ChangePanel("Statistics");
     }//GEN-LAST:event_StatisticsButtonActionPerformed
+
+    private void deleteOldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOldButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteOldButtonActionPerformed
+
+    private void updateOldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOldButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateOldButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -149,5 +182,7 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
     private javax.swing.JButton StatisticsButton;
     private javax.swing.JPanel TablePanel;
     private javax.swing.JButton UserButton;
+    private javax.swing.JButton deleteOldButton;
+    private javax.swing.JButton updateOldButton;
     // End of variables declaration//GEN-END:variables
 }

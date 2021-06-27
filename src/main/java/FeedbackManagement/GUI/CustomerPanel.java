@@ -5,6 +5,12 @@
  */
 package FeedbackManagement.GUI;
 
+import FeedbackManagement.Tables.FeedbackTablePanel;
+import FeedbackManagement.Tables.ResponseTablePanel;
+import FeedbackManagement.Tables.UserTablePanel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Serhat Korkmaz
@@ -12,6 +18,7 @@ package FeedbackManagement.GUI;
 public class CustomerPanel extends javax.swing.JPanel implements java.beans.Customizer {
     private final MainFrame mainFrame;
     private Object bean;
+    private javax.swing.JPanel tablePanel;
 
     /**
      * Creates new customizer CustomerPanel
@@ -23,6 +30,23 @@ public class CustomerPanel extends javax.swing.JPanel implements java.beans.Cust
     
     public void setObject(Object bean) {
         this.bean = bean;
+    }
+    
+    public void ChangePanel(String s){
+        TablePanel.removeAll();
+        switch (s) {
+            case "Feedback":
+                tablePanel = new FeedbackTablePanel();
+                break;
+            case "Response":
+                tablePanel = new ResponseTablePanel();
+                break;
+            default:
+                break;
+        }
+        TablePanel.add(tablePanel);
+        TablePanel.validate();
+        TablePanel.repaint();
     }
 
     /**
@@ -91,15 +115,17 @@ public class CustomerPanel extends javax.swing.JPanel implements java.beans.Cust
     }// </editor-fold>//GEN-END:initComponents
 
     private void FeedbacksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbacksButtonActionPerformed
-        // TODO add your handling code here:
+        ChangePanel("Feedback");
     }//GEN-LAST:event_FeedbacksButtonActionPerformed
 
     private void responseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responseButtonActionPerformed
-        // TODO add your handling code here:
+       ChangePanel("Response");
     }//GEN-LAST:event_responseButtonActionPerformed
 
     private void newFeedbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFeedbackButtonActionPerformed
-        // TODO add your handling code here:
+        NewFeedbackFrame frame = new NewFeedbackFrame(mainFrame);    
+        frame.setSize(280, 380);
+        frame.setVisible(true);  
     }//GEN-LAST:event_newFeedbackButtonActionPerformed
 
 

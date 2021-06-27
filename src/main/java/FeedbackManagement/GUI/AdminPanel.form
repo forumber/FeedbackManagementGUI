@@ -28,7 +28,11 @@
                       <Component id="ResponsesButton" min="-2" pref="101" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="StatisticsButton" min="-2" pref="102" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="317" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="deleteOldButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="updateOldButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -44,6 +48,8 @@
                   <Component id="FeedbacksButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ResponsesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="StatisticsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteOldButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="updateOldButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Component id="TablePanel" pref="424" max="32767" attributes="0"/>
@@ -87,6 +93,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StatisticsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteOldButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Old Records"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteOldButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="updateOldButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Update Old Records"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateOldButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
