@@ -13,9 +13,8 @@ import javax.swing.JFrame;
  *
  * @author Serhat Korkmaz
  */
-public class EmployeePanel extends javax.swing.JPanel implements java.beans.Customizer {
+public class EmployeePanel extends javax.swing.JPanel{
     private final MainFrame mainFrame;
-    private Object bean;
     private javax.swing.JPanel tablePanel;
 
     /**
@@ -24,10 +23,6 @@ public class EmployeePanel extends javax.swing.JPanel implements java.beans.Cust
     public EmployeePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
     
      public void ChangePanel(String s){

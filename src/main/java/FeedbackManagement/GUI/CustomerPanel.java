@@ -15,9 +15,8 @@ import javax.swing.JPanel;
  *
  * @author Serhat Korkmaz
  */
-public class CustomerPanel extends javax.swing.JPanel implements java.beans.Customizer {
+public class CustomerPanel extends javax.swing.JPanel{
     private final MainFrame mainFrame;
-    private Object bean;
     private javax.swing.JPanel tablePanel;
 
     /**
@@ -26,10 +25,6 @@ public class CustomerPanel extends javax.swing.JPanel implements java.beans.Cust
     public CustomerPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
     
     public void ChangePanel(String s){

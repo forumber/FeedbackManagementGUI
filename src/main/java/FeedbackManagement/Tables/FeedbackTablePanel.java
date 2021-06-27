@@ -22,9 +22,8 @@ import javax.swing.table.TableModel;
  *
  * @author Serhat Korkmaz
  */
-public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans.Customizer {
+public class FeedbackTablePanel extends javax.swing.JPanel{
     
-    private Object bean;
     /**
      * Creates new customizer FeedbackTablePanel
      */
@@ -34,10 +33,6 @@ public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans
         TableModel tableModel = new FeedbackTableModel(myList);
         jTable1 = new JTable(tableModel);
         jScrollPane1.setViewportView(jTable1);
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
 
     public Date convertToDate(String s) throws ParseException{
@@ -194,50 +189,49 @@ public class FeedbackTablePanel extends javax.swing.JPanel implements java.beans
     }// </editor-fold>//GEN-END:initComponents
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
-        HashMap<String, Object> Filter = new HashMap<String, Object>();
-            if(!feedbackCatIDTF.getText().isEmpty()){
-                Filter.put("CATID", Integer.parseInt(feedbackCatIDTF.getText()));
-            }
-            if(!feedbackCusIDTF.getText().isEmpty()){
-                Filter.put("CUSTOMERID", Integer.parseInt(feedbackCusIDTF.getText()));
-            }
-            if(!feedbackDateTF.getText().isEmpty()){
-                try {
+        HashMap<String, Object> Filter = new HashMap();
+        if (!feedbackCatIDTF.getText().isEmpty()) {
+            Filter.put("CATID", Integer.parseInt(feedbackCatIDTF.getText()));
+        }
+        if (!feedbackCusIDTF.getText().isEmpty()) {
+            Filter.put("CUSTOMERID", Integer.parseInt(feedbackCusIDTF.getText()));
+        }
+        if (!feedbackDateTF.getText().isEmpty()) {
+            try {
                 Filter.put("FD_DATE", convertToDate(feedbackDateTF.getText()));
-                } 
-                catch (ParseException ex) {
+            } catch (ParseException ex) {
                 Logger.getLogger(FeedbackTablePanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
-            if(!feedbackDepTF.getText().isEmpty()){
-                Filter.put("DEP_CODE", Integer.parseInt(feedbackDepTF.getText()));
+        }
+        if (!feedbackDepTF.getText().isEmpty()) {
+            Filter.put("DEP_CODE", Integer.parseInt(feedbackDepTF.getText()));
+        }
+        if (!feedbackEmpIDTF.getText().isEmpty()) {
+            Filter.put("EMPID", Integer.parseInt(feedbackEmpIDTF.getText()));
+        }
+        if (!feedbackIDTF.getText().isEmpty()) {
+            Filter.put("FEEDBACKID", Integer.parseInt(feedbackIDTF.getText()));
+        }
+        if (!"ALL".equals(feedbackStatusCB.getSelectedItem().toString())) {
+            switch (feedbackStatusCB.getSelectedItem().toString()) {
+                case "DONE_SUCCESS":
+                    Filter.put("STATUS", "DONE_SUCCESS");
+                    break;
+                case "DONE_FAIL":
+                    Filter.put("STATUS", "DONE_FAIL");
+                    break;
+                case "RESPONDED":
+                    Filter.put("STATUS", "RESPONDED");
+                    break;
+                case "SENT":
+                    Filter.put("STATUS", "SENT");
+                    break;
+                default:
+                    break;
             }
-            if(!feedbackEmpIDTF.getText().isEmpty()){
-                Filter.put("EMPID", Integer.parseInt(feedbackEmpIDTF.getText()));
-            }
-            if(!feedbackIDTF.getText().isEmpty()){
-                Filter.put("FEEDBACKID", Integer.parseInt(feedbackIDTF.getText()));
-            }
-            if(feedbackStatusCB.getSelectedItem().toString() != "ALL"){
-                switch (feedbackStatusCB.getSelectedItem().toString()) {
-                    case "DONE_SUCCESS":
-                        Filter.put("STATUS", "DONE_SUCCESS");
-                        break;
-                    case "DONE_FAIL":
-                        Filter.put("STATUS", "DONE_FAIL");
-                        break;
-                    case "RESPONDED":
-                        Filter.put("STATUS", "RESPONDED");
-                        break;
-                    case "SENT":
-                        Filter.put("STATUS", "SENT");
-                        break;
-                    default:
-                        break;
-                }
-            }
-            //Send the filter somewhere 
-        
+        }
+        //Send the filter somewhere 
+
     }//GEN-LAST:event_filterButtonActionPerformed
 
 

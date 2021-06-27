@@ -13,9 +13,8 @@ import FeedbackManagement.Tables.UserTablePanel;
  *
  * @author Serhat Korkmaz
  */
-public class AdminPanel extends javax.swing.JPanel implements java.beans.Customizer {
+public class AdminPanel extends javax.swing.JPanel {
     private final MainFrame mainFrame;
-    private Object bean;
     private javax.swing.JPanel tablePanel;
 
     /**
@@ -24,10 +23,6 @@ public class AdminPanel extends javax.swing.JPanel implements java.beans.Customi
     public AdminPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
-    }
-    
-    public void setObject(Object bean) {
-        this.bean = bean;
     }
     
     public void ChangePanel(String s){
