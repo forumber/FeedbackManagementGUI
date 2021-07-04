@@ -2,6 +2,7 @@ package FeedbackManagement;
 
 import FeedbackManagement.GUI.MainFrame;
 import FeedbackManagement.Models.User;
+import java.sql.Connection;
 import java.util.concurrent.CompletableFuture;
 
 public class MainApplication {
@@ -18,6 +19,8 @@ public class MainApplication {
         CompletableFuture.runAsync(() -> {
             repository = new Repository();
         });
+        
+       
     }
 
     public static void main(String[] args) {

@@ -5,9 +5,14 @@
  */
 package FeedbackManagement.GUI;
 
+import FeedbackManagement.MainApplication;
+import FeedbackManagement.RepositoryStatistics;
 import FeedbackManagement.Tables.FeedbackTablePanel;
 import FeedbackManagement.Tables.ResponseTablePanel;
 import FeedbackManagement.Tables.UserTablePanel;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
     
 /**
  *
@@ -176,11 +181,21 @@ public class AdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_StatisticsButtonActionPerformed
 
     private void deleteOldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOldButtonActionPerformed
-        // TODO add your handling code here:
+        
+        try {
+            MainApplication.repository.getRepoStatistics().deleteOldRecords();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_deleteOldButtonActionPerformed
 
     private void updateOldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOldButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            MainApplication.repository.getRepoStatistics().updateOldRecords();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_updateOldButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

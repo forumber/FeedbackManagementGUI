@@ -39,6 +39,8 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
         jLabel4 = new javax.swing.JLabel();
         feedbackTF = new javax.swing.JTextField();
         SendB = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        DepartmentCB = new javax.swing.JComboBox<>();
 
         categoryCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feedback", "Problem" }));
 
@@ -57,6 +59,10 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
             }
         });
 
+        jLabel1.setText("Department");
+
+        DepartmentCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Finance", "Sales", "Support" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,9 +75,13 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(SendB))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(categoryCB, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(categoryCB, 0, 105, Short.MAX_VALUE)
+                            .addComponent(DepartmentCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -82,9 +92,13 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(categoryCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(DepartmentCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(feedbackTF, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SendB)
                 .addContainerGap())
         );
@@ -101,9 +115,31 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
             Feedback feedback = new Feedback();
             feedback.setCustomerID(MainApplication.loggedInUser.getUserID());
             feedback.setMessage(feedbackTF.getText());
-            feedback.setCategoryID(1); // FIX ME
-            feedback.setDepCode(3); // FIX ME
+            switch (DepartmentCB.getSelectedItem().toString()) {
+                case "Sales":
+                feedback.setDepCode(4);
+                break;
+                case "Finanace":
+                feedback.setDepCode(3);
+                break;
+                case "Support":
+                feedback.setDepCode(5);
+                break;
+                default:
+                break;
+            }
             
+            switch (categoryCB.getSelectedItem().toString()) {
+                case "Feedback":
+                feedback.setCategoryID(1);
+                break;
+                case "Problem":
+                feedback.setCategoryID(2);
+                break;
+                default:
+                break;
+            }
+
             try {
                 MainApplication.repository.postNewFeedback(feedback);
                 JOptionPane.showMessageDialog(this, "Success!");
@@ -117,9 +153,11 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> DepartmentCB;
     private javax.swing.JButton SendB;
     private javax.swing.JComboBox<String> categoryCB;
     private javax.swing.JTextField feedbackTF;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

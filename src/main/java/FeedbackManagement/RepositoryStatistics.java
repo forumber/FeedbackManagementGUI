@@ -83,19 +83,28 @@ public class RepositoryStatistics {
 
     }
     
-    public Double getResponseRateToTotalFeedbacks() throws SQLException
+    public void deleteOldRecords() throws SQLException
     {
         String query = String.join(System.lineSeparator(), 
-                "SELECT (rpp.rp_count / fdd.fd_count)",
-                "  FROM (SELECT COUNT(fd.feedbackid) AS FD_COUNT FROM FEEDBACKS fd) fdd,",
-                "       (SELECT COUNT(rp.responseid) AS RP_COUNT FROM RESPONSES rp) rpp",
-                "");
+                "DELETE FROM FEEDBACKS WHERE FD_DATE < TRUNC(SYSDATE) - 30");
         
         PreparedStatement statement =  connection.prepareStatement(query);
-        ResultSet resultSet = statement.executeQuery();
-        resultSet.next();
+        statement.executeQuery();
         
-        return resultSet.getDouble(1);
+        query = String.join(System.lineSeparator(), 
+                "DELETE FROM RESPONSES WHERE RESPONSE_DATE < TRUNC(SYSDATE) - 30");
+        
+        statement =  connection.prepareStatement(query);
+        statement.executeQuery();
+    }
+    
+    public void updateOldRecords() throws SQLException
+    {
+        String query = String.join(System.lineSeparator(), 
+                "UPDATE FEEDBACKS SET STATUS = 'DONE_SUCCESS' WHERE FD_DATE < TRUNC(SYSDATE) - 30 AND (STATUS = 'RESPONDED' OR STATUS = 'SENT')");
+        
+        PreparedStatement statement =  connection.prepareStatement(query);
+        statement.executeQuery();
     }
     
     public ResultSet getNumberOfCustomersThatHaveNotYetBeenReponded() throws SQLException
