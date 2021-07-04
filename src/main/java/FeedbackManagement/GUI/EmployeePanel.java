@@ -8,6 +8,7 @@ package FeedbackManagement.GUI;
 import FeedbackManagement.Tables.FeedbackTablePanel;
 import FeedbackManagement.Tables.ResponseTablePanel;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *

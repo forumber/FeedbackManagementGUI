@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author Serhat Korkmaz
  */
-public class NewResponseFrame extends javax.swing.JPanel  {
+public class NewResponseFrame extends javax.swing.JFrame  {
     
     private final MainFrame mainFrame;
 
@@ -47,15 +47,24 @@ public class NewResponseFrame extends javax.swing.JPanel  {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        FeedbackIDTF = new javax.swing.JTextField();
+        statusCB = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
         responseTF = new javax.swing.JTextField();
         SendB = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        statusCB = new javax.swing.JComboBox<>();
-        FeedbackIDTF = new javax.swing.JTextField();
 
-        jLabel2.setText("Feedback ID:");
+        jLabel1.setText("Feedback ID:");
+
+        FeedbackIDTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeedbackIDTFActionPerformed(evt);
+            }
+        });
+
+        statusCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RESPONDED", "DONE_SUCCESS", "DONE_FAIL" }));
+
+        jLabel5.setText("Mark as ");
 
         responseTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,106 +79,93 @@ public class NewResponseFrame extends javax.swing.JPanel  {
             }
         });
 
-        jLabel5.setText("Mark as ");
-
-        statusCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RESPONDED", "DONE_SUCCESS", "DONE_FAIL" }));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(responseTF)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(SendB))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FeedbackIDTF))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(statusCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(FeedbackIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(statusCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(responseTF, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(SendB)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(FeedbackIDTF))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(statusCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(responseTF, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(SendB)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(FeedbackIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(statusCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addComponent(responseTF, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(SendB)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void responseTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responseTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_responseTFActionPerformed
-
     private void SendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendBActionPerformed
-         if (responseTF.getText().isEmpty())
-            JOptionPane.showMessageDialog(mainFrame, "You need to enter your response first!!");
+        if (responseTF.getText().isEmpty())
+        JOptionPane.showMessageDialog(mainFrame, "You need to enter your response first!!");
         else{
             Response response = new Response();
             response.setAnswer(responseTF.getText());
             response.setEmpID(MainApplication.loggedInUser.getUserID());
-            response.setResponseDate((java.sql.Date) currentDate());
             switch (statusCB.getSelectedItem().toString()) {
-                    case "RESPONDED":
-                         response.setStatus("RESPONDED");
-                        break;
-                    case "DONE_SUCCESS":
-                        response.setStatus("DONE_SUCCESS");
-                        break;
-                    case "DONE_FAIL":
-                        response.setStatus("DONE_FAIL");
-                        break;
-                    default:
-                        break;
-                }
+                case "RESPONDED":
+                response.setStatus("RESPONDED");
+                break;
+                case "DONE_SUCCESS":
+                response.setStatus("DONE_SUCCESS");
+                break;
+                case "DONE_FAIL":
+                response.setStatus("DONE_FAIL");
+                break;
+                default:
+                break;
+            }
             response.setFeedID(Integer.parseInt(FeedbackIDTF.getText()));
-            
+
             try {
                 MainApplication.repository.postNewResponse(response);
                 JOptionPane.showMessageDialog(this, "Success!");
                 //dispose();
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(NewResponseFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_SendBActionPerformed
 
+    private void responseTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responseTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_responseTFActionPerformed
+
+    private void FeedbackIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbackIDTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FeedbackIDTFActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField FeedbackIDTF;
     private javax.swing.JButton SendB;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField responseTF;
     private javax.swing.JComboBox<String> statusCB;
     // End of variables declaration//GEN-END:variables
