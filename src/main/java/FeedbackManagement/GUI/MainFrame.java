@@ -66,7 +66,7 @@ public class MainFrame extends javax.swing.JFrame {
             getContentPane().add(new AdminPanel(this));
             pack();
             repaint();
-            setSize(804, 400);
+            setSize(850, 400);
         } 
         else if (panelName.equalsIgnoreCase("Customer"))
         {
