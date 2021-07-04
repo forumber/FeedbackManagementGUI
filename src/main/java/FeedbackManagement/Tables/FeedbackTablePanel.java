@@ -43,11 +43,15 @@ public class FeedbackTablePanel extends javax.swing.JPanel{
                     feedbackList = MainApplication.repository.getFeedbacks(null);
                     break;
                 case CUSTOMER:
+                    feedbackCusIDTF.setText(Integer.toString(MainApplication.loggedInUser.getUserID()));
+                    feedbackCusIDTF.setEnabled(false);
                     filter = new HashMap();
                     filter.put("customerid", MainApplication.loggedInUser.getUserID());
                     feedbackList = MainApplication.repository.getFeedbacks(filter);
                     break;
                 case EMPLOYEE:
+                    feedbackEmpIDTF.setText(Integer.toString(MainApplication.loggedInUser.getUserID()));
+                    feedbackEmpIDTF.setEnabled(false);
                     filter = new HashMap();
                     filter.put("empid", MainApplication.loggedInUser.getUserID());
                     feedbackList = MainApplication.repository.getFeedbacks(filter);

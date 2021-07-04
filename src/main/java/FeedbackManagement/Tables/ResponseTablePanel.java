@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,14 +35,32 @@ public class ResponseTablePanel extends javax.swing.JPanel{
      * Creates new customizer ResponseTablePanel
      */
     public ResponseTablePanel() {
+        Map<String, Object> filter = null;
         initComponents();
         try {
-            responseList = MainApplication.repository.getResponses(null);
+            switch (MainApplication.loggedInUser.getUserType())
+            {
+                case ADMIN:
+                    responseList = MainApplication.repository.getResponses(null);
+                    break;
+                case CUSTOMER:
+                    filter = new HashMap();
+                    filter.put("customerid", MainApplication.loggedInUser.getUserID());
+                    responseList = MainApplication.repository.getResponses(filter);
+                    break;
+                case EMPLOYEE:
+                    employeeID.setText(Integer.toString(MainApplication.loggedInUser.getUserID()));
+                    employeeID.setEnabled(false);
+                    filter = new HashMap();
+                    filter.put("empid", MainApplication.loggedInUser.getUserID());
+                    responseList = MainApplication.repository.getResponses(filter);
+                    break;
+            }
             TableModel tableModel = new ResponseTableModel(responseList);
             jTable1 = new JTable(tableModel);
             jScrollPane1.setViewportView(jTable1);
         } catch (SQLException ex) {
-            Logger.getLogger(ResponseTablePanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FeedbackTablePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -205,6 +224,17 @@ public class ResponseTablePanel extends javax.swing.JPanel{
                     default:
                         break;
                 }
+            }
+            switch (MainApplication.loggedInUser.getUserType())
+            {
+            case ADMIN:
+                break;
+            case CUSTOMER:
+                Filter.put("customerid", MainApplication.loggedInUser.getUserID());
+                break;
+            case EMPLOYEE:
+                Filter.put("empid", MainApplication.loggedInUser.getUserID());
+                break;
             }
             try {
                 responseList = MainApplication.repository.getResponses(Filter);

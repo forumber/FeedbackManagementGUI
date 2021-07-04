@@ -66,7 +66,7 @@ public class MainFrame extends javax.swing.JFrame {
             getContentPane().add(new AdminPanel(this));
             pack();
             repaint();
-            setSize(850, 400);
+            setSize(850, 450);
         } 
         else if (panelName.equalsIgnoreCase("Customer"))
         {
@@ -74,7 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
             getContentPane().add(new CustomerPanel(this));
             pack();
             repaint();
-            setSize(804, 400);
+            setSize(850, 450);
         } 
         else if (panelName.equalsIgnoreCase("Employee"))
         {
@@ -82,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
             getContentPane().add(new EmployeePanel(this));
             pack();
             repaint();
-            setSize(804, 400);
+            setSize(850, 450);
         } 
         setLocationRelativeTo(null);
         setVisible(true);

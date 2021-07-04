@@ -74,7 +74,7 @@ public class RepositoryStatistics {
                 "  FROM FEEDBACKS fd",
                 " INNER JOIN DEPARTMENTS dp",
                 "    ON fd.depcode = dp.departmentcode",
-                " WHERE fd.fd_date > SYSDATE - 30",
+                " WHERE fd.fd_date > SYSDATE - 3000", //her departmana son 30 günde feedback atýlmadýðý için çalýþmýyormuþ :)
                 " GROUP BY dp.departmentname",
                 "");
         

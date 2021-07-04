@@ -56,6 +56,7 @@ public class CustomerPanel extends javax.swing.JPanel{
         FeedbacksButton = new javax.swing.JButton();
         newFeedbackButton = new javax.swing.JButton();
         responseButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
         FeedbacksButton.setText("My Feedbacks");
         FeedbacksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +79,13 @@ public class CustomerPanel extends javax.swing.JPanel{
             }
         });
 
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,11 +95,14 @@ public class CustomerPanel extends javax.swing.JPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FeedbacksButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(responseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(newFeedbackButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FeedbacksButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(responseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(newFeedbackButton))
+                            .addComponent(logoutButton))
                         .addGap(0, 526, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -103,9 +114,11 @@ public class CustomerPanel extends javax.swing.JPanel{
                     .addComponent(FeedbacksButton)
                     .addComponent(newFeedbackButton)
                     .addComponent(responseButton))
-                .addGap(13, 13, 13)
-                .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logoutButton)
+                .addGap(76, 76, 76))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,10 +136,15 @@ public class CustomerPanel extends javax.swing.JPanel{
         frame.setVisible(true);  
     }//GEN-LAST:event_newFeedbackButtonActionPerformed
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        mainFrame.changePanel("LoginRegisterSelection");
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FeedbacksButton;
     private javax.swing.JPanel TablePanel;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JButton newFeedbackButton;
     private javax.swing.JButton responseButton;
     // End of variables declaration//GEN-END:variables

@@ -32,6 +32,7 @@ public class Repository {
     private final String insertToCustomersQuery = "INSERT INTO CUSTOMERS (phonenumber, registrationdate, userid) VALUES (?, ?, ?)";
     private final String getNextUserIdQuery = "SELECT SEQ_USERS.nextval FROM DUAL";
     private final String getNextFeedbackIdQuery = "SELECT SEQ_FEEDBACKS.nextval FROM DUAL";
+    private final String getNextResponseIdQuery = "SELECT SEQ_RESPONSES.nextval FROM DUAL";
     private final String getUserQuery = "SELECT * FROM USERS";
     private final String getAdminQuery = "SELECT clearancelevel FROM ADMINS WHERE userid = ?";
     private final String getEmployeeQuery = "SELECT depcode, startdate FROM EMPLOYEES WHERE userid = ?";
@@ -39,6 +40,7 @@ public class Repository {
     private final String getResponseQuery = "SELECT * FROM RESPONSES";
     private final String getFeedbackQuery = "SELECT * FROM FEEDBACKS";
     private final String postNewFeedbackQuery = "INSERT INTO FEEDBACKS (catýd, customerýd, depcode, empýd, fd_date, feedbackýd, message, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String postNewResponseQuery = "INSERT INTO RESPONSES (responseid, answer, response_date, status, feedid, empid) VALUES (?, ?, ?, ?, ?, ?)";
     
     public Repository()
     {
@@ -69,6 +71,19 @@ public class Repository {
         
         insertStatement.executeUpdate();
         
+    }
+    
+    public void postNewResponse(Response newResponse) throws SQLException
+    {
+        PreparedStatement insertStatement =  connection.prepareStatement(postNewResponseQuery);
+        insertStatement.setInt(1, getNextResponseId());
+        insertStatement.setString(2, newResponse.getAnswer());
+        insertStatement.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+        insertStatement.setString(4, newResponse.getStatus()); 
+        insertStatement.setInt(5, newResponse.getFeedID());
+        insertStatement.setInt(6, newResponse.getEmpID());
+
+        insertStatement.executeUpdate();
         
     }
     
@@ -82,6 +97,13 @@ public class Repository {
     private int getNextFeedbackId() throws SQLException
     {
         ResultSet result = connection.createStatement().executeQuery(getNextFeedbackIdQuery);
+        result.next();
+        return result.getInt(1);
+    }
+    
+    private int getNextResponseId() throws SQLException
+    {
+        ResultSet result = connection.createStatement().executeQuery(getNextResponseIdQuery);
         result.next();
         return result.getInt(1);
     }

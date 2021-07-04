@@ -53,6 +53,7 @@ public class EmployeePanel extends javax.swing.JPanel{
         FeedbacksButton = new javax.swing.JButton();
         myResponsesButton = new javax.swing.JButton();
         newResponseButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
         FeedbacksButton.setText("Feedbacks");
         FeedbacksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +76,13 @@ public class EmployeePanel extends javax.swing.JPanel{
             }
         });
 
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,11 +92,14 @@ public class EmployeePanel extends javax.swing.JPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FeedbacksButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(myResponsesButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(newResponseButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FeedbacksButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(myResponsesButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(newResponseButton))
+                            .addComponent(logoutButton))
                         .addGap(0, 506, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -100,9 +111,11 @@ public class EmployeePanel extends javax.swing.JPanel{
                     .addComponent(FeedbacksButton)
                     .addComponent(myResponsesButton)
                     .addComponent(newResponseButton))
-                .addGap(4, 4, 4)
-                .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logoutButton)
+                .addGap(90, 90, 90))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,10 +133,15 @@ public class EmployeePanel extends javax.swing.JPanel{
         frame.setVisible(true);  
     }//GEN-LAST:event_newResponseButtonActionPerformed
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        mainFrame.changePanel("LoginRegisterSelection");
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FeedbacksButton;
     private javax.swing.JPanel TablePanel;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JButton myResponsesButton;
     private javax.swing.JButton newResponseButton;
     // End of variables declaration//GEN-END:variables
