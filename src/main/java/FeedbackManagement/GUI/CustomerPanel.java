@@ -131,8 +131,8 @@ public class CustomerPanel extends javax.swing.JPanel{
     }//GEN-LAST:event_responseButtonActionPerformed
 
     private void newFeedbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFeedbackButtonActionPerformed
-        NewFeedbackFrame frame = new NewFeedbackFrame(mainFrame);    
-        frame.setSize(280, 380);
+        NewFeedbackFrame frame = new NewFeedbackFrame(mainFrame);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);  
     }//GEN-LAST:event_newFeedbackButtonActionPerformed
 
