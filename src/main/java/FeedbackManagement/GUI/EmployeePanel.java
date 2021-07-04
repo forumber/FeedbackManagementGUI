@@ -130,7 +130,7 @@ public class EmployeePanel extends javax.swing.JPanel{
 
     private void newResponseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newResponseButtonActionPerformed
         NewResponseFrame frame = new NewResponseFrame(mainFrame);    
-        frame.setSize(280, 380);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);  
     }//GEN-LAST:event_newResponseButtonActionPerformed
 

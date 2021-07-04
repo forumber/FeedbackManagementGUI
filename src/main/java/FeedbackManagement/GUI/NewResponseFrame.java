@@ -51,8 +51,12 @@ public class NewResponseFrame extends javax.swing.JFrame  {
         FeedbackIDTF = new javax.swing.JTextField();
         statusCB = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        responseTF = new javax.swing.JTextField();
         SendB = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        RpTextArea = new javax.swing.JTextArea();
+
+        setResizable(false);
+        setSize(new java.awt.Dimension(256, 309));
 
         jLabel1.setText("Feedback ID:");
 
@@ -66,18 +70,16 @@ public class NewResponseFrame extends javax.swing.JFrame  {
 
         jLabel5.setText("Mark as ");
 
-        responseTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                responseTFActionPerformed(evt);
-            }
-        });
-
         SendB.setText("Send Response");
         SendB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SendBActionPerformed(evt);
             }
         });
+
+        RpTextArea.setColumns(20);
+        RpTextArea.setRows(5);
+        jScrollPane1.setViewportView(RpTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,15 +88,15 @@ public class NewResponseFrame extends javax.swing.JFrame  {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FeedbackIDTF))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addComponent(statusCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(responseTF, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(SendB)))
@@ -111,20 +113,20 @@ public class NewResponseFrame extends javax.swing.JFrame  {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(statusCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addComponent(responseTF, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SendB)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void SendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendBActionPerformed
-        if (responseTF.getText().isEmpty())
+        if (RpTextArea.getText().isEmpty())
         JOptionPane.showMessageDialog(mainFrame, "You need to enter your response first!!");
         else{
             Response response = new Response();
-            response.setAnswer(responseTF.getText());
+            response.setAnswer(RpTextArea.getText());
             response.setEmpID(MainApplication.loggedInUser.getUserID());
             switch (statusCB.getSelectedItem().toString()) {
                 case "RESPONDED":
@@ -148,13 +150,10 @@ public class NewResponseFrame extends javax.swing.JFrame  {
 
             } catch (SQLException ex) {
                 Logger.getLogger(NewResponseFrame.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error!");
             }
         }
     }//GEN-LAST:event_SendBActionPerformed
-
-    private void responseTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responseTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_responseTFActionPerformed
 
     private void FeedbackIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbackIDTFActionPerformed
         // TODO add your handling code here:
@@ -163,10 +162,11 @@ public class NewResponseFrame extends javax.swing.JFrame  {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField FeedbackIDTF;
+    private javax.swing.JTextArea RpTextArea;
     private javax.swing.JButton SendB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField responseTF;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> statusCB;
     // End of variables declaration//GEN-END:variables
 }

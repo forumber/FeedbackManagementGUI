@@ -45,7 +45,7 @@ public class ResponseTablePanel extends javax.swing.JPanel{
                     break;
                 case CUSTOMER:
                     filter = new HashMap();
-                    filter.put("customerid", MainApplication.loggedInUser.getUserID());
+                    filter.put("RESPONSE_FIX USERID", MainApplication.loggedInUser.getUserID());
                     responseList = MainApplication.repository.getResponses(filter);
                     break;
                 case EMPLOYEE:

@@ -188,7 +188,9 @@ public class Repository {
         {
             query += query.contains("WHERE") ? " AND " : " WHERE ";
             
-            if (filters.get(columnName) instanceof  String)
+            if (columnName.startsWith("RESPONSE_FIX"))
+                query += "feedid IN (SELECT FEEDBACKID FROM FEEDBACKS WHERE CUSTOMERID = ?)";
+            else if (filters.get(columnName) instanceof  String)
                 query += columnName + " LIKE ?";
             else
                 query += columnName + " = ?";
