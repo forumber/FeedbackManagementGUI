@@ -54,9 +54,7 @@ public class Repository {
             System.exit(0);
         }
     }
-    
 
-    
     public void postNewFeedback(Feedback newFeedback) throws SQLException
     {
         PreparedStatement insertStatement =  connection.prepareStatement(postNewFeedbackQuery);
@@ -167,7 +165,11 @@ public class Repository {
         for (String columnName : filters.keySet())
         {
             query += query.contains("WHERE") ? " AND " : " WHERE ";
-            query += columnName + " = ?";
+            
+            if (filters.get(columnName) instanceof  String)
+                query += columnName + " LIKE ?";
+            else
+                query += columnName + " = ?";
         }
         
         PreparedStatement statement = connection.prepareStatement(query);
@@ -180,7 +182,7 @@ public class Repository {
             
             try
             {
-                statement.setString(statementIndex, (String)arg);
+                statement.setString(statementIndex, "%" + (String)arg + "%");
             }
             catch(ClassCastException e1)
             {
