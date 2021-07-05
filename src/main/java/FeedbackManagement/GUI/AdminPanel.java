@@ -13,6 +13,7 @@ import FeedbackManagement.Tables.UserTablePanel;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
     
 /**
  *
@@ -184,8 +185,10 @@ public class AdminPanel extends javax.swing.JPanel {
         
         try {
             MainApplication.repository.getRepoStatistics().deleteOldRecords();
+            JOptionPane.showMessageDialog(mainFrame, "Success!");
         } catch (SQLException ex) {
             Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(mainFrame, "Error!");
         }
         
     }//GEN-LAST:event_deleteOldButtonActionPerformed
@@ -193,8 +196,10 @@ public class AdminPanel extends javax.swing.JPanel {
     private void updateOldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOldButtonActionPerformed
         try {
             MainApplication.repository.getRepoStatistics().updateOldRecords();
+            JOptionPane.showMessageDialog(mainFrame, "Success!");
         } catch (SQLException ex) {
             Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(mainFrame, "Error!");
         }
     }//GEN-LAST:event_updateOldButtonActionPerformed
 
