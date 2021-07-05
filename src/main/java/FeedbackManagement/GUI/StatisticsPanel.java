@@ -43,7 +43,7 @@ public class StatisticsPanel extends javax.swing.JPanel{
     public void initTables() throws SQLException{
         CustomerNotRespondedTable = new JTable(buildTableModel(MainApplication.repository.getRepoStatistics().getNumberOfCustomersThatHaveNotYetBeenReponded())); 
         DailyFeedbackTable  = new JTable(buildTableModel(MainApplication.repository.getRepoStatistics().getAverageNumberOfDailyFeedbackReceivedForEachDepartmentInTheLastMonth()));
-        //ResponseRateLabel.setText(MainApplication.repository.getRepoStatistics().getResponseRateToTotalFeedbacks().toString());
+        ResponseRateLabel.setText(MainApplication.repository.getRepoStatistics().getResponseRateToTotalFeedbacks().toString());
         
         jScrollPane3.setViewportView(CustomerNotRespondedTable);
         jScrollPane4.setViewportView(DailyFeedbackTable);
