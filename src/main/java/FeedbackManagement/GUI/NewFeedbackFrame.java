@@ -38,17 +38,12 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
         categoryCB = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         SendB = new javax.swing.JButton();
-<<<<<<< HEAD
-        jLabel1 = new javax.swing.JLabel();
-        DepartmentCB = new javax.swing.JComboBox<>();
-=======
         jScrollPane1 = new javax.swing.JScrollPane();
         FbTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(280, 300));
         setSize(new java.awt.Dimension(280, 300));
->>>>>>> 9fe4086cc5c5934f0fe4d5bcafcce1f240161844
 
         categoryCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feedback", "Problem" }));
 
@@ -61,15 +56,9 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
             }
         });
 
-<<<<<<< HEAD
-        jLabel1.setText("Department");
-
-        DepartmentCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Finance", "Sales", "Support" }));
-=======
         FbTextArea.setColumns(20);
         FbTextArea.setRows(5);
         jScrollPane1.setViewportView(FbTextArea);
->>>>>>> 9fe4086cc5c5934f0fe4d5bcafcce1f240161844
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,19 +72,10 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(SendB))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-<<<<<<< HEAD
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(categoryCB, 0, 105, Short.MAX_VALUE)
-                            .addComponent(DepartmentCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-=======
                         .addComponent(categoryCB, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 51, Short.MAX_VALUE)))
->>>>>>> 9fe4086cc5c5934f0fe4d5bcafcce1f240161844
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,19 +85,9 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(categoryCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(DepartmentCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(feedbackTF, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
->>>>>>> 9fe4086cc5c5934f0fe4d5bcafcce1f240161844
                 .addComponent(SendB)
                 .addContainerGap())
         );
@@ -129,22 +99,6 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
         else{
             Feedback feedback = new Feedback();
             feedback.setCustomerID(MainApplication.loggedInUser.getUserID());
-<<<<<<< HEAD
-            feedback.setMessage(feedbackTF.getText());
-            switch (DepartmentCB.getSelectedItem().toString()) {
-                case "Sales":
-                feedback.setDepCode(4);
-                break;
-                case "Finanace":
-                feedback.setDepCode(3);
-                break;
-                case "Support":
-                feedback.setDepCode(5);
-                break;
-                default:
-                break;
-            }
-=======
             feedback.setMessage(FbTextArea.getText());
             
             if (categoryCB.getSelectedItem().toString().equals("Feedback"))
@@ -152,19 +106,7 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
             else
                 feedback.setCategoryID(2);
             feedback.setDepCode(3); // FIX ME
->>>>>>> 9fe4086cc5c5934f0fe4d5bcafcce1f240161844
             
-            switch (categoryCB.getSelectedItem().toString()) {
-                case "Feedback":
-                feedback.setCategoryID(1);
-                break;
-                case "Problem":
-                feedback.setCategoryID(2);
-                break;
-                default:
-                break;
-            }
-
             try {
                 MainApplication.repository.postNewFeedback(feedback);
                 JOptionPane.showMessageDialog(this, "Success!");
@@ -179,17 +121,9 @@ public class NewFeedbackFrame extends javax.swing.JFrame{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JComboBox<String> DepartmentCB;
-    private javax.swing.JButton SendB;
-    private javax.swing.JComboBox<String> categoryCB;
-    private javax.swing.JTextField feedbackTF;
-    private javax.swing.JLabel jLabel1;
-=======
     private javax.swing.JTextArea FbTextArea;
     private javax.swing.JButton SendB;
     private javax.swing.JComboBox<String> categoryCB;
->>>>>>> 9fe4086cc5c5934f0fe4d5bcafcce1f240161844
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
