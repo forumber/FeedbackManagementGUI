@@ -133,4 +133,19 @@ public class RepositoryStatistics {
         return statement.executeQuery();
         
     }
+    
+    public Double getResponseRateToTotalFeedbacks() throws SQLException
+    {
+        String query = String.join(System.lineSeparator(), 
+                "SELECT (rpp.rp_count / fdd.fd_count)",
+                "  FROM (SELECT COUNT(fd.feedbackid) AS FD_COUNT FROM FEEDBACKS fd) fdd,",
+                "       (SELECT COUNT(rp.responseid) AS RP_COUNT FROM RESPONSES rp) rpp",
+                "");
+        
+        PreparedStatement statement =  connection.prepareStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+        resultSet.next();
+        
+        return resultSet.getDouble(1);
+    }
 }
